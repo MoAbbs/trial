@@ -1,0 +1,72 @@
+buznsi_organizations:
+  id: buznsi_organizations
+  name: Organizations
+  _index: 2
+  action:
+    key: route/navigate
+    path: /product-company
+  app: buznsi_admin
+  icon:
+    type: ai
+    name: AiFillBuild
+
+buznsi_product_company: 
+  id: buznsi_product_company
+  name: Company
+  app: buznsi_admin
+  url: product-company
+  action:
+    path: /product-company
+    key: route/navigate
+  icon: 
+    type: ai
+    name: AiOutlineProfile
+  parent: buznsi_organizations
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: product__company
+      fetch: [product__company]
+      models: 
+        product__company: {}
+
+
+buznsi_product_company_item: 
+  id: buznsi_product_company_item
+  name: Company Item
+  app: buznsi_admin
+  url: product-company-item
+  action:
+    path: /product-company-item
+    key: route/navigate
+  icon: 
+    type: ai
+    name: AiOutlineProfile
+  parent: buznsi_organizations
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: product__company_item
+      fetch: [product__company_item]
+      models: 
+        product__company_item: {}
+
+product__company_item_values: 
+  id: product__company_item_values
+  name: Company Item Values
+  app: buznsi_admin
+  url: product-company_item_value
+  icon: 
+    type: ai
+    name: AiOutlineCluster
+  action:
+    path: /product-company_item_value
+    key: route/navigate
+  parent: buznsi_organizations
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: company_item_values
+      fetch: [company_item_values]
+      models: 
+        company_item_values: {}

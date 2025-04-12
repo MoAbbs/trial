@@ -1,0 +1,60 @@
+id: buznsi_admin_popup_create
+app: buznsi_admin
+s_class: admin/form.module.less
+comps:
+  body:
+    wraps:
+      apply:
+        key: store/Dispatching
+        fun: reset_all_form
+        then:
+          key: object/Pick
+          path: 'props'
+          picks: [submitForm, validateForm]
+          then:
+            key: store/Dispatching
+            fun: set_path_form
+            params:
+              path: main
+      Form:
+        onSubmit:
+          key: form/submitMultiForm
+          then:
+            key: form/linked
+            then:
+              key: request/updating
+              then:
+                key: msg/alert
+                msg:  Data Saved Successful
+    type: layout.style
+    s_class: ${layout}
+    comps:
+      list:
+        wraps:
+          apply:
+            key: common/multiApply
+            apps:
+              data:
+                path: props.item
+          BuildFields:
+            models: ${models}
+          route: {}
+        type: common.collapse
+        headers:
+          comp: common.text
+          fun:
+            path: props.item.title
+          _type: h3
+        fun:
+          key: list/ToArray
+          path: props.models
+        card:
+          wraps:
+            apply:
+              key: common/multiApply
+              apps:
+                data:
+                  path: props.item
+          comp: layout.widget
+          w_type: buznsi_admin_inner_form
+          picks: [data, item, gs]

@@ -1,0 +1,163 @@
+buznsi_settings_settings:
+  id: buznsi_settings_settings
+  name: Settings
+  _index: 2
+  action:
+    key: route/navigate
+    path: /settings-country
+  app: buznsi_admin
+  icon:
+    type: ai
+    name: AiFillBuild
+
+buznsi_settings_country: 
+  id: buznsi_settings_country
+  name: Country
+  app: buznsi_admin
+  url: settings-country
+  action:
+    path: /settings-country
+    key: route/navigate
+  icon: 
+    type: ai
+    name: AiOutlineProfile
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__country
+      fetch: [settings__country]
+      models: 
+        settings__country: {}
+
+
+buznsi_settings_city: 
+  id: buznsi_settings_city
+  name: City
+  app: buznsi_admin
+  url: settings-city
+  action:
+    path: /settings-city
+    key: route/navigate
+  icon: 
+    type: ai
+    name: AiOutlineProfile
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__city
+      fetch: [settings__city]
+      models: 
+        settings__city: {}
+
+settings__item_category: 
+  id: settings__item_category
+  name: Item Category
+  app: buznsi_admin
+  url: settings-item-category
+  icon: 
+    type: ai
+    name: AiOutlineCluster
+  action:
+    path: /settings-item-category
+    key: route/navigate
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__item_category
+      fetch: [settings__item_category]
+      models: 
+        settings__item_category: {}
+
+buznsi_settings__items: 
+  id: buznsi_settings__items
+  name: Items
+  app: buznsi_admin
+  url: settings-items
+  icon: 
+    type: ai
+    name: AiFillCheckSquare
+  action:
+    path: /settings-items
+    key: route/navigate
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      extra_button:
+        type: layout.widget
+        w_type: buznsi_file_upload
+        data:
+          accept: .xlsx,.xls
+          params:
+            id: buznsi_items
+      app: settings__items
+      fetch: [settings__items]
+      models: 
+        settings__items: {}
+
+
+buznsi_settings__offer: 
+  id: buznsi_settings__offer
+  name: Offer
+  app: buznsi_admin
+  url: settings-offer
+  icon: 
+    type: ai
+    name: AiOutlineDeploymentUnit
+  action:
+    path: /settings-offer
+    key: route/navigate
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__offer
+      fetch: [settings__offer]
+      models: 
+        settings__offer: {}
+
+
+buznsi_settings__plan: 
+  id: buznsi_settings__plan
+  name: Plan
+  app: buznsi_admin
+  url: settings-plan
+  icon: 
+    type: ai
+    name: AiOutlineDeploymentUnit
+  action:
+    path: /settings-plan
+    key: route/navigate
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__plan
+      fetch: [settings__plan]
+      models: 
+        settings__plan: {}
+
+
+buznsi_settings__schedule: 
+  id: buznsi_settings__schedule
+  name: Schedule
+  app: buznsi_admin
+  url: settings-schedule
+  icon: 
+    type: ai
+    name: AiOutlineDeploymentUnit
+  action:
+    path: /settings-schedule
+    key: route/navigate
+  parent: buznsi_settings_settings
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      app: settings__schedule
+      fetch: [settings__schedule]
+      models: 
+        settings__schedule: {}
+

@@ -1,0 +1,53 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+authentication_token:
+    path: /auth
+    methods: ['POST']
+
+MultiQuery:
+    path: '/api/v1/multi_query/'
+    methods: ['POST']
+    defaults:
+      _controller: '\App\DataProvider\MultiQuery::multiQuries'
+
+
+FieldsQuery:
+    path: '/api/v1/get_fields/'
+    methods: ['POST']
+    defaults:
+      _controller: '\App\DataProvider\MultiQuery::getModelsFields'
+
+
+GetUser:
+    path: '/api/v1/get-user/'
+    methods: ['GET', 'POST']
+    defaults:
+      _controller: '\App\DataProvider\GetUser::user'
+
+
+Auth:
+    path: '/api/v1/auth/'
+    methods: ['POST']
+    defaults:
+      _controller: '\App\DataProvider\GetUser::login'
+
+
+MultiCount:
+    path: '/api/v1/count/'
+    methods: ['POST']
+    defaults:
+      _controller: '\App\DataProvider\MultiQuery::multiCount'
+
+UpdateModels:
+    path: '/api/v1/update_models/'
+    methods: ['POST']
+    defaults:
+        _controller: '\App\DataProvider\UpdateModels::list'
+
+
+ReadExcelFile:
+    path: '/api/v1/upload_excel/'
+    methods: ['POST']
+    defaults:
+      _controller: '\App\DataProvider\ReadFiles::readExcel'

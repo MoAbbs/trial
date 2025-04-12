@@ -1,0 +1,117 @@
+.divSty {
+  background-color: #fff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 20px 50px;
+}
+.divSty span {
+  font-family: "NeusaNextPro";
+  font-size: 25px;
+  color: #012547;
+}
+.divSty div {
+  font-family: "NeusaNextPro";
+  color: #455054;
+  font-size: 8px;
+  margin-top: 8px;
+}
+.iconSt {
+  cursor: pointer;
+  margin-right: 20px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 14px 20px;
+  border-radius: 50%;
+}
+
+.iconSt svg {
+  width: 30px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.iconSt3 {
+  cursor: pointer;
+  margin-right: 20px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 17px;
+  border-radius: 50%;
+}
+.iconSt3 svg {
+  width: 37px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.iconSt5 {
+  cursor: pointer;
+  margin-right: 20px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px 11px;
+  border-radius: 50%;
+}
+.iconSt5 svg {
+  width: 55px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.iconSt7 {
+  cursor: pointer;
+  margin-right: 20px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 12px 14px;
+  border-radius: 50%;
+}
+.iconSt7 svg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.iconSt1 {
+  cursor: pointer;
+  margin-right: 5px;
+  align-items: center;
+  background-color: #f0f0f0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iconSt1 svg {
+  width: 30px;
+  display: block;
+  text-align: center;
+}
+.headTxt {
+  color: #012547;
+  font-family: "NeusaNextPro";
+  font-size: 20px !important;
+}
+@media only screen and (min-width: 768px) {
+  .divSty {
+    padding: 20px;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .divSty {
+    padding: 20px 50px;
+  }
+}
+
+@media only screen and (min-width: 980px) and (max-width: 1200px) {
+  .divSty span {
+    font-size: 16px !important;
+  }
+}

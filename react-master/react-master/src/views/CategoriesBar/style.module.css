@@ -1,0 +1,105 @@
+.divSty {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 10px 0;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  width: 200px;
+}
+.divSty span {
+  font-family: "NeusaNextPro";
+  font-size: 12px;
+  color: #012547;
+}
+
+.iconSt {
+  cursor: pointer;
+  margin-right: 20px;
+  align-items: center;
+  background-color: #f0f0f0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconSt svg {
+  width: 20px;
+  display: block;
+  text-align: center;
+}
+
+.btnSty {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  color: #012547;
+  font-family: "NeusaNextPro";
+  margin-right: 10px;
+}
+.btnSty:hover {
+  color: #012547 !important;
+}
+.collapseSt {
+  background-color: #fff;
+  width: 100%;
+  height: 180px;
+  padding: 10px 5px;
+  border-radius: 10px;
+  margin: 5px auto;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  /* position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999; */
+  -webkit-animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s;
+  -ms-animation: fadein 0.5s;
+  -o-animation: fadein 0.5s;
+  animation: fadein 0.5s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.closeBtn {
+  font-size: 30px;
+}
+.closeBtn:focus {
+  box-shadow: none;
+}
+.flexStyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.flexStyle::-webkit-scrollbar {
+  height: 5px;
+  cursor: pointer;
+}
+.flexStyle::-webkit-scrollbar-thumb {
+  background: #012547;
+  border-radius: 4px;
+  transition: all 1s;
+}
+
+.flexStyle::-webkit-scrollbar-thumb:hover {
+  background: #012547;
+}
+.secHeight {
+  margin-bottom: 10px;
+}

@@ -1,0 +1,25 @@
+.modal-footer {
+  justify-content: space-between !important;
+  border-top: none;
+}
+.modal-header {
+  border-bottom: none;
+}
+.modal-title {
+  color: #095195;
+}
+.modal-footer .btn-light-primary {
+  color: red !important;
+  box-shadow: none !important;
+  padding: 7px 20px;
+  border: none;
+  font-family: "NeusaNextPro";
+  text-decoration: underline;
+}
+.modal-footer .btn-primary {
+  background-color: #012547 !important;
+  color: #fff;
+  padding: 7px 20px;
+  border: none;
+  font-family: "NeusaNextPro";
+}

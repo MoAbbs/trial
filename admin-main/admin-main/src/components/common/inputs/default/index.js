@@ -1,0 +1,12 @@
+import {lazy} from 'react';
+export const boolean = lazy(()=>import('./boolean/index.jsx'))
+export const bool = lazy(()=>import('./boolean/index.jsx'))
+export const text = lazy(()=>import('./text/index.jsx'))
+export const string = lazy(()=>import('./text/index.jsx'))
+export const password = lazy(()=>import('./password/index.jsx'))
+export const number = lazy(()=>import('./number/index.jsx'))
+export const int = lazy(()=>import('./number/index.jsx'))
+export const integer = lazy(()=>import('./number/index.jsx'))
+export const label = lazy(()=>import('./label/index.jsx'))
+export const show_files = lazy(()=>import('./show_files/index.jsx'))
+export const file = lazy(()=>import('./file/index.jsx'))

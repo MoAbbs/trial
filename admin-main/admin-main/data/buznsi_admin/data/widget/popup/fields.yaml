@@ -1,0 +1,34 @@
+id: buznsi_admin_fields_form
+app: buznsi_admin
+s_class: popup/${s_class|fields.module.less}
+comp: layout.style
+wraps:
+  Form:
+    init:
+      key: object/mapParams
+      params:
+        item: ${item}
+      fun:
+        key: object/spread
+    onSubmit: ${onSubmit}
+  apply:
+    key: common/resetData
+    reset: ${fields}
+comps:
+  fields:
+    type: common.normal_list
+    fun:
+      key: list/ToArray
+      path: props.item.fields
+    card:
+      wraps:
+        apply:
+          key: common/multiApply
+          apps:
+            extra: 
+              path: props.item
+            data:
+              path: props.item
+      picks: [s_classes]
+      comp: layout.widget
+      w_type: buznsi_admin_field

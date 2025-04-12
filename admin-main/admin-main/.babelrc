@@ -1,0 +1,72 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "exclude": ["proposal-dynamic-import"],
+        "useBuiltIns": "entry", "corejs": "3.0.0",
+        "targets": { 
+          "browsers": [ "Android >= 4" ],
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "codegen",
+    [
+      "import",
+      { "libraryName": "antd", "style": true },
+      "antd"
+    ],
+    // modularly import the JS that we use from ‘@ant-design/icons’
+    [
+      "import",
+      {
+        "libraryName": "@ant-design/icons",
+        "libraryDirectory": "es/icons"
+      },
+      "antd-icons"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "lodash",
+        "libraryDirectory": "",
+        "camel2DashComponentName": false
+      },
+      "lodash"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "react-icons",
+        "camel2DashComponentName": false
+      },
+      "react-icons"
+    ],
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/transform-runtime",
+    "@babel/plugin-transform-spread",
+    "@babel/proposal-class-properties",
+    // "@babel/proposal-class-properties",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ]
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import"
+  ]
+}

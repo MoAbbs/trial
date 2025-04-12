@@ -1,0 +1,62 @@
+buznsi_admin_home:
+  id: buznsi_admin_home
+  url: home
+  name: home
+  app: buznsi_admin
+  icon:
+    type: ai
+    name: AiFillHome
+  widgets: 
+    w_type: buznsi_admin_home 
+    data: 
+      fun:
+        key: strings/replaceTemplate
+        str: apps__module.groups.parent.
+
+buznsi_admin_login:
+  id: buznsi_admin_login
+  url: login
+  props:
+    skip: true
+  name: login
+  app: buznsi_admin
+  widgets:
+    w_type: buznsi_admin_login
+    data:
+      logo: logo.png
+  parent: buznsi_admin_home
+
+buznsi_admin_init:
+  id: buznsi_admin_init
+  init: true
+  app: buznsi_admin
+  name: init
+  body:
+    wraps:
+      apply:
+        key: request/getCurrentUser
+        fail:
+          key: store/inited
+          path: props.match.params
+          then:
+            key: route/replace
+            qs: true
+            path: /login
+        then:
+          key: store/Dispatching
+          fun: 'set_main_main'
+          then:
+            key: store/inited
+            then:
+              key: common/resetData
+              then:
+                key: common/compare
+                comp: props.match.params.module
+                then:
+                  key: common/condition
+                  success:
+                    key: route/replace
+                    path: /home
+      route: {}
+    comp: common.fragment
+  parent: buznsi_admin_home

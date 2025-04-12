@@ -1,0 +1,4535 @@
+{
+  "data": {
+    "apps__app": [
+      {
+        "id": "swra_admin",
+        "name": "SafeWra Admin",
+        "models": {
+          "swra__profile": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__car": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__daily_plan": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__group": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__task": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__tool": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__trip": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__visit": {
+            "filter": {
+              "org": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "swra__org": {
+            "filter": {
+              "id": "$[main.user.apps.swra.org.id]"
+            }
+          },
+          "auth__user": {
+            "filter": {
+              "apps.swra.org": "$[main.user.apps.swra.org.id]"
+            }
+          }
+        }
+      }
+    ],
+    "apps__widget": [
+      {
+        "id": "swra_admin_field",
+        "app": "swra_admin",
+        "wraps": {
+          "condition": {
+            "key": "list/Every",
+            "funs": "${per}"
+          }
+        },
+        "comp": {
+          "type": "common.input"
+        },
+        "props": {
+          "placeholder": "${ph}",
+          "label": "${label}",
+          "_type": "${_type}",
+          "name": "${model}",
+          "props": "${props}"
+        }
+      },
+      {
+        "id": "swra_admin_header",
+        "app": "swra_admin",
+        "comps": {
+          "body": {
+            "wraps": {
+              "route": {}
+            },
+            "type": "layout.style",
+            "s_class": "home/header.module.less",
+            "comps": {
+              "logo": {
+                "type": "common.image",
+                "extra": {
+                  "preview": false
+                },
+                "width": 70,
+                "image": {
+                  "key": "request/publicFile",
+                  "file": "safewra.png"
+                }
+              },
+              "title": {
+                "wraps": {
+                  "connect": {
+                    "module": {
+                      "key": "list/Find",
+                      "path": "apps__module.data",
+                      "params": {
+                        "url": "props.match.params.module"
+                      },
+                      "then": {
+                        "key": "strings/replaceTemplate",
+                        "str": "apps__module.data.:id"
+                      }
+                    }
+                  },
+                  "route": {}
+                },
+                "type": "layout.style",
+                "props": {
+                  "cs": "title"
+                },
+                "picks": [
+                  "module"
+                ],
+                "comps": {
+                  "icon": {
+                    "type": "common.icon",
+                    "type_fun": {
+                      "path": "props.module.icon"
+                    }
+                  },
+                  "text": {
+                    "type": "common.text",
+                    "_type": "Title",
+                    "fun": {
+                      "path": "props.module.name"
+                    }
+                  }
+                }
+              },
+              "btns": {
+                "type": "layout.style",
+                "props": {
+                  "cs": "btn"
+                },
+                "comps": {
+                  "apps": {
+                    "wraps": {
+                      "route": {}
+                    },
+                    "action": {
+                      "key": "route/replace",
+                      "path": "/home"
+                    },
+                    "type": "common.button",
+                    "_type": "link",
+                    "comps": {
+                      "icon": {
+                        "type": "common.icon",
+                        "_type": "ai",
+                        "name": "AiFillAppstore"
+                      }
+                    }
+                  },
+                  "profile": {
+                    "type": "common.popover",
+                    "_type": "link",
+                    "shape": "circle",
+                    "pop": {
+                      "trigger": "click"
+                    },
+                    "content": {
+                      "comp": "layout.style",
+                      "s_class": "home/profile.module.less",
+                      "comps": {
+                        "profile": {
+                          "type": "common.button",
+                          "_type": "text",
+                          "text": "profile"
+                        },
+                        "logout": {
+                          "wraps": {
+                            "route": []
+                          },
+                          "type": "common.button",
+                          "_type": "text",
+                          "text": "Logout",
+                          "action": {
+                            "key": "store/Dispatching",
+                            "dis": [
+                              {
+                                "type": "reset_all_main",
+                                "data": {}
+                              }
+                            ],
+                            "then": {
+                              "key": "route/replace",
+                              "path": "/login"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comps": {
+                      "avatar": {
+                        "type": "common.avatar",
+                        "fun": {
+                          "path": "main.user.name.first_name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_home",
+        "app": "swra_admin",
+        "comps": {
+          "header": {
+            "type": "layout.widget",
+            "w_type": "swra_admin_header"
+          },
+          "body": {
+            "type": "layout.style",
+            "s_class": "home/home.module.less",
+            "comps": {
+              "body": {
+                "type": "layout.style",
+                "cs": "list",
+                "comps": {
+                  "list": {
+                    "type": "common.normal_list",
+                    "picks": [
+                      "classes"
+                    ],
+                    "fun": {
+                      "key": "list/Reject",
+                      "path": "props.list",
+                      "params": {
+                        "url": "home"
+                      },
+                      "then": {
+                        "key": "list/SortBy",
+                        "keys": [
+                          "_index"
+                        ]
+                      }
+                    },
+                    "wraps": {
+                      "connect": {
+                        "list": "${fun}"
+                      }
+                    },
+                    "card": {
+                      "comp": "common.button",
+                      "_type": "text",
+                      "wraps": {
+                        "route": {}
+                      },
+                      "action": {
+                        "key": "common/RunDataFunction",
+                        "path": "props.item",
+                        "fun": "action"
+                      },
+                      "picks": [
+                        "classes"
+                      ],
+                      "cs": "item",
+                      "comps": {
+                        "icon": {
+                          "type": "common.icon",
+                          "type_fun": {
+                            "key": "common/noop",
+                            "path": "props.item.icon"
+                          }
+                        },
+                        "title": {
+                          "type": "common.text",
+                          "_type": "Title",
+                          "fun": {
+                            "key": "common/noop",
+                            "path": "props.item.name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_login",
+        "app": "swra_admin",
+        "s_class": "home/login.module.less",
+        "wraps": {
+          "Form": {
+            "init": {
+              "key": "common/resetData",
+              "reset": {
+                "app": "swra"
+              },
+              "then": {
+                "key": "store/inited"
+              }
+            },
+            "onSubmit": {
+              "key": "request/login",
+              "fail": {
+                "key": "object/StateSelector",
+                "path": "error.response.data.msg",
+                "then": {
+                  "key": "msg/alert",
+                  "type": "error"
+                }
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_main_main",
+                "then": {
+                  "key": "route/QueryParams",
+                  "param": "module",
+                  "default": "home",
+                  "then": {
+                    "key": "strings/prefix",
+                    "prefix": "/",
+                    "then": {
+                      "key": "route/replace"
+                    }
+                  }
+                }
+              }
+            },
+            "form": {
+              "size": "large",
+              "labelCol": {
+                "span": 4
+              },
+              "wrapperCol": {
+                "span": 20
+              }
+            }
+          },
+          "route": {}
+        },
+        "comp": {
+          "type": "layout.style"
+        },
+        "comps": {
+          "body": {
+            "type": "layout.style",
+            "props": {
+              "cs": "body"
+            },
+            "comps": {
+              "logo": {
+                "type": "layout.style",
+                "props": {
+                  "cs": "img"
+                },
+                "comps": {
+                  "img": {
+                    "type": "common.image",
+                    "extra": {
+                      "preview": false
+                    },
+                    "image": {
+                      "key": "request/publicFile",
+                      "file": "safewra.png"
+                    }
+                  }
+                }
+              },
+              "username": {
+                "ph": "Input Username",
+                "type": "layout.widget",
+                "w_type": "swra_admin_field",
+                "data": {
+                  "label": "Email",
+                  "_type": "text",
+                  "model": "username",
+                  "validates": {
+                    "required": true
+                  }
+                }
+              },
+              "password": {
+                "ph": "Input Password",
+                "type": "layout.widget",
+                "w_type": "swra_admin_field",
+                "data": {
+                  "label": "Password",
+                  "_type": "password",
+                  "model": "password",
+                  "validates": {
+                    "required": true
+                  }
+                }
+              },
+              "btns": {
+                "type": "common.input",
+                "_type": "design.master",
+                "item": {
+                  "wrapperCol": {
+                    "offset": 8
+                  }
+                },
+                "props": {
+                  "comps": {
+                    "submit": {
+                      "type": "common.button",
+                      "text": "Login",
+                      "_type": "primary",
+                      "htmlType": "submit",
+                      "action": {
+                        "key": "form/Action"
+                      }
+                    },
+                    "forget": {
+                      "wraps": {
+                        "route": {}
+                      },
+                      "type": "common.button",
+                      "text": "Forget Password",
+                      "_type": "text",
+                      "action": {
+                        "key": "route/navigate",
+                        "path": "/forget-pass"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_buttons",
+        "app": "swra_admin",
+        "comps": {
+          "list": {
+            "type": "common.normal_list",
+            "wraps": {
+              "route": []
+            },
+            "fun": "${fun}",
+            "card": {
+              "comp": "common.condition",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "apps__module.groups.parent.$[props.item.id]"
+              },
+              "success": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.button",
+                    "_type": "text",
+                    "picks": [
+                      "item"
+                    ],
+                    "comps": {
+                      "icon": {
+                        "type_fun": {
+                          "key": "common/noop",
+                          "path": "props.item.icon"
+                        }
+                      },
+                      "label": {
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.button",
+                    "_type": "text",
+                    "s_class": "home/sider.module.less",
+                    "action": {
+                      "key": "common/RunDataFunction",
+                      "fun": "action",
+                      "path": "props.item"
+                    },
+                    "picks": [
+                      "item"
+                    ],
+                    "wraps": {
+                      "ClassName": {
+                        "fun": {
+                          "path": "props.match.params",
+                          "key": "common/condition_fun",
+                          "fun": {
+                            "key": "common/compare",
+                            "val": "props.item.url",
+                            "to": "module"
+                          },
+                          "success": "active",
+                          "fail": ""
+                        }
+                      },
+                      "route": {}
+                    },
+                    "comps": {
+                      "icon": {
+                        "type": "common.icon",
+                        "type_fun": {
+                          "key": "common/noop",
+                          "path": "props.item.icon"
+                        }
+                      },
+                      "text": {
+                        "type": "common.label",
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_manage",
+        "app": "swra_admin",
+        "comps": {
+          "header": {
+            "type": "layout.widget",
+            "w_type": "swra_admin_header"
+          },
+          "body": {
+            "type": "layout.style",
+            "s_class": "home/home.module.less",
+            "comps": {
+              "sider": {
+                "type": "layout.widget",
+                "w_type": "swra_admin_sider",
+                "data": {
+                  "fun": {
+                    "key": "object/StateSelector",
+                    "path": "apps__module.groups.url.$[props.match.params.module]",
+                    "then": {
+                      "key": "object/GetMainParent",
+                      "path": "apps__module",
+                      "then": {
+                        "key": "object/chain",
+                        "selectors": {
+                          "apps": {
+                            "path": "apps__module.groups.parent.:id"
+                          }
+                        },
+                        "then": {
+                          "key": "list/ToArray"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "table": {
+                "type": "layout.main",
+                "_type": "Content",
+                "s_class": "home/content.module.less",
+                "wraps": {
+                  "Fetch": {
+                    "fetch": "${fetch}"
+                  }
+                },
+                "comps": {
+                  "btns": {
+                    "type": "layout.style",
+                    "s_class": "admin/btns.module.less",
+                    "comps": {
+                      "create": {
+                        "wraps": {
+                          "condition": {
+                            "key": "list/Every",
+                            "funs": "${create_per}"
+                          }
+                        },
+                        "type": "common.button",
+                        "text": "Create New",
+                        "_type": "",
+                        "action": {
+                          "key": "store/Dispatching",
+                          "dis": [
+                            {
+                              "type": "set_main_popup",
+                              "data": {
+                                "popup": {
+                                  "type": "side",
+                                  "cs": "side",
+                                  "s_class": "side/container.module.less",
+                                  "side": {
+                                    "placement": "right",
+                                    "theme": "dark",
+                                    "title": "Main Form"
+                                  },
+                                  "app": "${app}",
+                                  "headers": {
+                                    "cancel": {
+                                      "type": "common.button",
+                                      "_type": "",
+                                      "text": "Cancel",
+                                      "action": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "props.close"
+                                      }
+                                    },
+                                    "submit": {
+                                      "text": "Save",
+                                      "type": "common.button",
+                                      "action": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "form.main.submitForm",
+                                        "then": {
+                                          "key": "common/executeStateFun",
+                                          "fun": "props.close"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "body": {
+                                    "comp": "layout.widget",
+                                    "w_type": "swra_admin_popup_create",
+                                    "data": {
+                                      "app": "${app}",
+                                      "models": "${models}"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "extra_button": "${extra_button}"
+                    }
+                  },
+                  "list": {
+                    "type": "layout.widget",
+                    "w_type": "swra_admin_table",
+                    "data": {
+                      "app": "${app}",
+                      "fun": "${fun}",
+                      "actions": {
+                        "comps": {
+                          "edit": {
+                            "type": "common.button",
+                            "_type": "",
+                            "action": {
+                              "key": "object/mapParams",
+                              "params": {
+                                "item": "props.item",
+                                "type": "side",
+                                "cs": "side",
+                                "s_class": "side/container.module.less",
+                                "side": {
+                                  "placement": "right",
+                                  "theme": "dark",
+                                  "title": "Main Form"
+                                },
+                                "app": "${app}",
+                                "headers": {
+                                  "cancel": {
+                                    "type": "common.button",
+                                    "_type": "",
+                                    "text": "Cancel",
+                                    "action": {
+                                      "key": "common/executeStateFun",
+                                      "fun": "props.close"
+                                    }
+                                  },
+                                  "submit": {
+                                    "text": "Save",
+                                    "type": "common.button",
+                                    "action": {
+                                      "key": "common/executeStateFun",
+                                      "fun": "form.main.submitForm",
+                                      "then": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "props.close"
+                                      }
+                                    }
+                                  }
+                                },
+                                "body": {
+                                  "comp": "layout.widget",
+                                  "w_type": "swra_admin_popup_create",
+                                  "data": {
+                                    "app": "${app}",
+                                    "models": "${models}"
+                                  }
+                                }
+                              },
+                              "then": {
+                                "key": "object/addKeys",
+                                "keys": [
+                                  "popup"
+                                ],
+                                "then": {
+                                  "key": "store/Dispatching",
+                                  "fun": "set_main_popup"
+                                }
+                              }
+                            },
+                            "icon": {
+                              "type": "ai",
+                              "name": "AiOutlineEdit"
+                            }
+                          }
+                        }
+                      },
+                      "extra_actions": "${extra_actions}",
+                      "extra_view": "${extra_view}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_menu",
+        "app": "swra_admin",
+        "comps": {
+          "list": {
+            "type": "common.normal_list",
+            "fun": "${fun}",
+            "card": {
+              "comp": "common.condition",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "apps__module.groups.parent.$[props.item.id]"
+              },
+              "success": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.sub_menu",
+                    "_type": "SubMenu",
+                    "picks": [
+                      "item"
+                    ],
+                    "icon": {
+                      "type_fun": {
+                        "key": "common/noop",
+                        "path": "props.item.icon"
+                      }
+                    },
+                    "label": {
+                      "fun": {
+                        "key": "common/noop",
+                        "path": "props.item.name"
+                      }
+                    },
+                    "comps": {
+                      "menu": {
+                        "type": "layout.widget",
+                        "w_type": "swra_admin_menu",
+                        "picks": [
+                          "item"
+                        ],
+                        "data": {
+                          "fun": {
+                            "key": "object/StateSelector",
+                            "path": "apps__module.groups.parent.$[props.item.id]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.menu_item",
+                    "_type": "Item",
+                    "picks": [
+                      "item"
+                    ],
+                    "icon": {
+                      "type_fun": {
+                        "key": "common/noop",
+                        "path": "props.item.icon"
+                      }
+                    },
+                    "comps": {
+                      "text": {
+                        "type": "common.label",
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_popup_fields",
+        "app": "swra_admin",
+        "comps": {
+          "body": {
+            "wraps": {
+              "fields": {
+                "type": "apply",
+                "key": "common/resetData",
+                "reset": {
+                  "fields": "${fields}"
+                }
+              },
+              "funs": {
+                "type": "apply",
+                "key": "object/Pick",
+                "picks": [
+                  "props.submitForm",
+                  "props.validateForm"
+                ],
+                "then": {
+                  "key": "store/Dispatching",
+                  "fun": "set_path_popup",
+                  "params": {
+                    "path": "form"
+                  }
+                }
+              },
+              "Form": {
+                "onSubmit": "${onSubmit}",
+                "init": "${init_value}"
+              }
+            },
+            "type": "layout.style",
+            "picks": [
+              "fields"
+            ],
+            "comps": {
+              "fields": {
+                "type": "common.normal_list",
+                "fun": {
+                  "key": "list/ToArray",
+                  "path": "props.fields"
+                },
+                "card": {
+                  "comp": "common.fun",
+                  "fun": {
+                    "path": "props.item"
+                  }
+                },
+                "wraps": {
+                  "route": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_sider",
+        "app": "swra_admin",
+        "comps": {
+          "body": {
+            "type": "layout.main",
+            "_type": "Sider",
+            "s_class": "home/sider.module.less",
+            "extra": {
+              "width": 200,
+              "collapsible": true
+            },
+            "comps": {
+              "menu": {
+                "wraps": {
+                  "route": {}
+                },
+                "type": "layout.widget",
+                "w_type": "swra_admin_buttons",
+                "data": {
+                  "fun": "${fun}"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_table",
+        "app": "swra_admin",
+        "comps": {
+          "body": {
+            "type": "layout.style",
+            "_type": "Sider",
+            "s_class": "home/table.module.less",
+            "comps": {
+              "table": {
+                "wraps": {
+                  "list_filter": {
+                    "type": "apply",
+                    "key": "common/multiApply",
+                    "apps": {
+                      "list": {
+                        "key": "object/StateSelector",
+                        "path": "props",
+                        "then": {
+                          "key": "common/RunDataFunction",
+                          "fun": "fun"
+                        }
+                      }
+                    }
+                  },
+                  "connects": {
+                    "type": "connect",
+                    "main_data": "${app}.data",
+                    "main_fields": "fields.data.${app}.fields"
+                  },
+                  "BuildTable": {
+                    "app": "${app}",
+                    "actions": "${actions}",
+                    "extra_actions": "${extra_actions}",
+                    "extra_view": "${extra_view}"
+                  },
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "fields": {
+                        "path": "fields.data.${app}.fields"
+                      },
+                      "extra_fields": {
+                        "path": "fields.data.${app}.extra_fields"
+                      },
+                      "extra": {
+                        "path": "fields.data.${app}.extra"
+                      },
+                      "view": {
+                        "path": "fields.data.${app}.view"
+                      }
+                    }
+                  },
+                  "connect": {
+                    "main_fields": "fields.data.${app}.fields"
+                  }
+                },
+                "type": "layout.table"
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_fields_form",
+        "app": "swra_admin",
+        "s_class": "popup/${s_class|fields.module.less}",
+        "comp": "layout.style",
+        "wraps": {
+          "Form": {
+            "init": {
+              "key": "object/mapParams",
+              "params": {
+                "item": "${item}"
+              },
+              "fun": {
+                "key": "object/spread"
+              }
+            },
+            "onSubmit": "${onSubmit}"
+          },
+          "apply": {
+            "key": "common/resetData",
+            "reset": "${fields}"
+          }
+        },
+        "comps": {
+          "fields": {
+            "type": "common.normal_list",
+            "fun": {
+              "key": "list/ToArray",
+              "path": "props.item.fields"
+            },
+            "card": {
+              "wraps": {
+                "apply": {
+                  "key": "common/multiApply",
+                  "apps": {
+                    "extra": {
+                      "path": "props.item"
+                    },
+                    "data": {
+                      "path": "props.item"
+                    }
+                  }
+                }
+              },
+              "picks": [
+                "s_classes"
+              ],
+              "comp": "layout.widget",
+              "w_type": "swra_admin_field"
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_inner_form",
+        "app": "swra_admin",
+        "s_class": "form/${s_class}",
+        "comp": "layout.style",
+        "wraps": {
+          "apply": {
+            "key": "object/Pick",
+            "picks": [
+              "props.submitForm",
+              "props.validateForm"
+            ],
+            "then": {
+              "key": "store/Dispatching",
+              "fun": "set_path_form",
+              "params": {
+                "path": "inners.${model}"
+              }
+            }
+          },
+          "Form": {
+            "init": {
+              "key": "common/oringFunc",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "form.init_values.${model}"
+              },
+              "or": {
+                "key": "object/mapParams",
+                "params": "${init}",
+                "then": {
+                  "key": "strings/id",
+                  "then": {
+                    "key": "object/mapDotsToVal"
+                  }
+                }
+              }
+            },
+            "onSubmit": {
+              "key": "form/submitInner",
+              "app": "${model}"
+            }
+          },
+          "init": {
+            "type": "apply",
+            "key": "common/condition",
+            "path": "popup.popup.item.id",
+            "success": {
+              "key": "common/condition",
+              "path": "fields.data.${model}.edit",
+              "success": {
+                "key": "list/Find",
+                "path": "${model}",
+                "db_path": "popup.popup.item",
+                "params": "${edit}"
+              },
+              "fail": {
+                "path": "popup.popup.item"
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_path_form",
+                "params": {
+                  "path": "init_values.${model}"
+                }
+              }
+            }
+          },
+          "form_vals": {
+            "pick": [
+              "handleChange"
+            ]
+          }
+        },
+        "comps": {
+          "fields": {
+            "type": "common.normal_list",
+            "fun": {
+              "key": "list/ToArray",
+              "path": "props.item.fields"
+            },
+            "card": {
+              "wraps": {
+                "apply": {
+                  "key": "common/multiApply",
+                  "apps": {
+                    "extra": {
+                      "path": "props.item"
+                    },
+                    "data": {
+                      "path": "props.item"
+                    }
+                  }
+                }
+              },
+              "picks": [
+                "s_classes"
+              ],
+              "comp": "layout.widget",
+              "w_type": "swra_admin_field"
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_popup_create",
+        "app": "swra_admin",
+        "s_class": "admin/form.module.less",
+        "comps": {
+          "body": {
+            "wraps": {
+              "apply": {
+                "key": "store/Dispatching",
+                "fun": "reset_all_form",
+                "then": {
+                  "key": "object/Pick",
+                  "path": "props",
+                  "picks": [
+                    "submitForm",
+                    "validateForm"
+                  ],
+                  "then": {
+                    "key": "store/Dispatching",
+                    "fun": "set_path_form",
+                    "params": {
+                      "path": "main"
+                    }
+                  }
+                }
+              },
+              "Form": {
+                "onSubmit": {
+                  "key": "form/submitMultiForm",
+                  "then": {
+                    "key": "form/linked",
+                    "then": {
+                      "key": "request/updating",
+                      "then": {
+                        "key": "msg/alert",
+                        "msg": "Data Saved Successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "type": "layout.style",
+            "s_class": "${layout}",
+            "comps": {
+              "list": {
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "data": {
+                        "path": "props.item"
+                      }
+                    }
+                  },
+                  "BuildFields": {
+                    "models": "${models}"
+                  },
+                  "route": {}
+                },
+                "type": "common.collapse",
+                "headers": {
+                  "comp": "common.text",
+                  "fun": {
+                    "path": "props.item.title"
+                  },
+                  "_type": "h3"
+                },
+                "fun": {
+                  "key": "list/ToArray",
+                  "path": "props.models"
+                },
+                "card": {
+                  "wraps": {
+                    "apply": {
+                      "key": "common/multiApply",
+                      "apps": {
+                        "data": {
+                          "path": "props.item"
+                        }
+                      }
+                    }
+                  },
+                  "comp": "layout.widget",
+                  "w_type": "swra_admin_inner_form",
+                  "picks": [
+                    "data",
+                    "item",
+                    "gs"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_file_upload",
+        "app": "swra_admin",
+        "comps": {
+          "btn": {
+            "wraps": {
+              "condition": {
+                "key": "list/Every",
+                "funs": "${per}"
+              }
+            },
+            "text": "${title}",
+            "type": "common.button",
+            "_type": "",
+            "action": {
+              "key": "request/upload_excel",
+              "extra": "${extra}",
+              "accept": "${accept}",
+              "url": "${url}",
+              "multiple": "${multiple}",
+              "params": "${params}"
+            }
+          }
+        }
+      },
+      {
+        "id": "swra_admin_approvals",
+        "app": "swra_admin",
+        "comps": {
+          "btn": {
+            "wraps": {
+              "condition": {
+                "key": "list/Every",
+                "funs": "${per}"
+              }
+            },
+            "comps": {
+              "icon": {
+                "type": "common.icon",
+                "_type": "ai",
+                "name": "${icon}"
+              }
+            },
+            "extra": "${props.button}",
+            "action": {
+              "key": "object/mapParams",
+              "params": {
+                "id": "props.item.id"
+              },
+              "then": {
+                "key": "object/spread",
+                "extra": "${extra}",
+                "then": {
+                  "key": "object/ToList",
+                  "then": {
+                    "key": "object/addKey",
+                    "show": "${model}",
+                    "then": {
+                      "key": "request/updating"
+                    }
+                  }
+                }
+              }
+            },
+            "type": "common.button",
+            "_type": "${props._type}"
+          }
+        }
+      },
+      {
+        "id": "swra_admin_table_approvals",
+        "app": "swra_admin",
+        "comps": {
+          "btn": {
+            "wraps": {
+              "condition": {
+                "key": "list/Every",
+                "funs": "${per}"
+              }
+            },
+            "text": "${text}",
+            "action": {
+              "key": "list/Filter",
+              "path": "${model}",
+              "params": "${params}",
+              "then": {
+                "key": "list/mapping",
+                "fun": {
+                  "key": "object/spread",
+                  "extra": "${extra}"
+                },
+                "then": {
+                  "key": "object/addKeys",
+                  "keys": [
+                    "${model}"
+                  ],
+                  "then": {
+                    "key": "request/updating"
+                  }
+                }
+              }
+            },
+            "type": "common.button",
+            "_type": "${_type}"
+          }
+        }
+      }
+    ],
+    "apps__module": [
+      {
+        "id": "sfwra_admin_home",
+        "url": "home",
+        "name": "home",
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillHome"
+        },
+        "widgets": {
+          "w_type": "swra_admin_home",
+          "data": {
+            "fun": {
+              "key": "strings/replaceTemplate",
+              "str": "apps__module.groups.parent."
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_login",
+        "url": "login",
+        "props": {
+          "skip": true
+        },
+        "name": "login",
+        "app": "swra_admin",
+        "widgets": {
+          "w_type": "swra_admin_login",
+          "data": {
+            "logo": "logo.png"
+          }
+        },
+        "parent": "sfwra_admin_home"
+      },
+      {
+        "id": "sfwra_admin_init",
+        "init": true,
+        "app": "swra_admin",
+        "name": "init",
+        "body": {
+          "wraps": {
+            "apply": {
+              "key": "request/getCurrentUser",
+              "fail": {
+                "key": "store/inited",
+                "path": "props.match.params",
+                "then": {
+                  "key": "route/replace",
+                  "qs": true,
+                  "path": "/login"
+                }
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_main_main",
+                "then": {
+                  "key": "store/inited",
+                  "then": {
+                    "key": "common/resetData",
+                    "then": {
+                      "key": "common/compare",
+                      "comp": "props.match.params.module",
+                      "then": {
+                        "key": "common/condition",
+                        "success": {
+                          "key": "route/replace",
+                          "path": "/home"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "route": {}
+          },
+          "comp": "common.fragment"
+        },
+        "parent": "sfwra_admin_home"
+      },
+      {
+        "id": "sfwra_admin_org",
+        "name": "Organization",
+        "_index": 2,
+        "action": {
+          "key": "route/navigate",
+          "path": "/company-profile"
+        },
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillBuild"
+        }
+      },
+      {
+        "id": "sfwra_admin_profile",
+        "name": "Organization",
+        "app": "swra_admin",
+        "url": "company-profile",
+        "action": {
+          "path": "/company-profile",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        },
+        "parent": "sfwra_admin_org",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__org",
+            "fetch": [
+              "swra__org"
+            ],
+            "models": {
+              "swra__org": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_category",
+        "name": "Category",
+        "app": "swra_admin",
+        "url": "company-category",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineCluster"
+        },
+        "action": {
+          "path": "/company-category",
+          "key": "route/navigate"
+        },
+        "parent": "sfwra_admin_org",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "main__category",
+            "fetch": [
+              "main__category"
+            ],
+            "models": {
+              "main__category": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_flow",
+        "name": "FLow",
+        "app": "swra_admin",
+        "url": "company-flow",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "action": {
+          "path": "/company-flow",
+          "key": "route/navigate"
+        },
+        "parent": "sfwra_admin_org",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__flow",
+            "fetch": [
+              "swra__flow"
+            ],
+            "models": {
+              "swra__flow": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_account",
+        "name": "Account",
+        "_index": 1,
+        "action": {
+          "path": "/account-user",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUsergroupAdd"
+        }
+      },
+      {
+        "id": "sfwra_admin_employee",
+        "_index": 12,
+        "name": "Employees",
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUserSwitch"
+        },
+        "parent": "sfwra_admin_account",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "auths__user"
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_user",
+        "_index": 11,
+        "name": "Users",
+        "app": "swra_admin",
+        "url": "account-user",
+        "action": {
+          "path": "/account-user",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUserSwitch"
+        },
+        "parent": "sfwra_admin_account",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "fetch": [
+              "auth__user",
+              "swra__profile"
+            ],
+            "app": "auth__user",
+            "extra_actions": {
+              "comps": {
+                "edit_password": {
+                  "type": "common.button",
+                  "_type": "",
+                  "action": {
+                    "key": "object/mapParams",
+                    "params": {
+                      "id": "props.item.id"
+                    },
+                    "then": {
+                      "key": "object/addKeys",
+                      "keys": [
+                        "item"
+                      ],
+                      "then": {
+                        "key": "object/spread",
+                        "extra": {
+                          "popup": {
+                            "type": "popup",
+                            "picks": [
+                              "item"
+                            ],
+                            "title": "Set New Password",
+                            "comps": {
+                              "fields": {
+                                "type": "layout.widget",
+                                "w_type": "swra_admin_popup_fields",
+                                "data": {
+                                  "fields": {
+                                    "password": {
+                                      "comp": "common.input",
+                                      "props": {
+                                        "placeholder": "Input Password",
+                                        "label": "Password",
+                                        "_type": "password",
+                                        "name": "password"
+                                      },
+                                      "validates": {
+                                        "required": true
+                                      }
+                                    }
+                                  },
+                                  "init_value": {
+                                    "path": "popup.item"
+                                  },
+                                  "onSubmit": {
+                                    "key": "object/ToList",
+                                    "then": {
+                                      "key": "object/addKeys",
+                                      "keys": [
+                                        "auth__user"
+                                      ],
+                                      "then": {
+                                        "key": "request/updating",
+                                        "then": {
+                                          "key": "store/Dispatching",
+                                          "dis": [
+                                            {
+                                              "type": "reset_all_popup",
+                                              "data": {}
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "btns": {
+                              "comps": {
+                                "cancel": {
+                                  "type": "common.button",
+                                  "_type": "default",
+                                  "text": "Cancel",
+                                  "action": {
+                                    "key": "common/executeStateFun",
+                                    "fun": "props.cancel"
+                                  }
+                                },
+                                "ok": {
+                                  "type": "common.button",
+                                  "text": "Save",
+                                  "action": {
+                                    "key": "common/executeStateFun",
+                                    "fun": "popup.form.props.submitForm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "then": {
+                          "key": "store/Dispatching",
+                          "fun": "set_main_popup"
+                        }
+                      }
+                    }
+                  },
+                  "comps": {
+                    "icon": {
+                      "type": "common.icon",
+                      "_type": "ai",
+                      "name": "AiFillLock"
+                    }
+                  }
+                }
+              }
+            },
+            "models": {
+              "auth__user": {
+                "init": {
+                  "app.safewra.active": true,
+                  "app.safewra.org": "main.swra.org"
+                }
+              },
+              "swra__profile": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_group",
+        "_index": 13,
+        "name": "Groups",
+        "app": "swra_admin",
+        "url": "account-group",
+        "action": {
+          "path": "/account-group",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUsergroupAdd"
+        },
+        "parent": "sfwra_admin_account",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "fetch": [
+              "swra__group"
+            ],
+            "app": "swra__group",
+            "models": {
+              "swra__group": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_assets",
+        "name": "Assets",
+        "action": {
+          "path": "/assets-tools",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiFillAlert"
+        }
+      },
+      {
+        "id": "sfwra_admin_car",
+        "name": "cars",
+        "app": "swra_admin",
+        "url": "assets-cars",
+        "action": {
+          "path": "/assets-cars",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiFillCar"
+        },
+        "parent": "sfwra_admin_assets",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__car",
+            "fetch": [
+              "swra__car"
+            ],
+            "models": {
+              "swra__car": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_tool",
+        "name": "Tools",
+        "app": "swra_admin",
+        "url": "assets-tools",
+        "action": {
+          "path": "/assets-tools",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineTool"
+        },
+        "parent": "sfwra_admin_assets",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__tool",
+            "fetch": [
+              "swra__tool"
+            ],
+            "models": {
+              "swra__tool": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_res",
+        "name": "Resources",
+        "_index": "5",
+        "action": {
+          "path": "/user",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillGolden"
+        }
+      },
+      {
+        "id": "sfwra_admin_daily_plan",
+        "name": "Daily Plan",
+        "action": {
+          "path": "/tasks-daily-plan",
+          "key": "route/navigate"
+        },
+        "_index": 4,
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUnorderedList"
+        }
+      },
+      {
+        "id": "sfwra_admin_plan",
+        "name": "Daily Plan",
+        "_index": 43,
+        "app": "swra_admin",
+        "url": "tasks-daily-plan",
+        "action": {
+          "path": "/tasks-daily-plan",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiFillReconciliation"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__daily_plan",
+            "extra_view": {
+              "car_license": {
+                "per": {
+                  "not_package": {
+                    "key": "condition/not",
+                    "path": "main.user.apps.swra.org.settings.car_package"
+                  }
+                },
+                "label": "Car License",
+                "show_type": "bool",
+                "index": 5,
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "gs.val": {
+                        "path": "props.item",
+                        "key": "object/chain",
+                        "selectors": {
+                          "swra__car": "car"
+                        },
+                        "then": {
+                          "key": "common/compareFun",
+                          "compare": "lt",
+                          "to": "license_expiry_date",
+                          "fun": {
+                            "key": "date/Now",
+                            "then": {
+                              "key": "date/FormatDate",
+                              "format": "YYYY-MM-DD"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "driver_license": {
+                "per": {
+                  "not_package": {
+                    "key": "condition/not",
+                    "path": "main.user.apps.swra.org.settings.car_package"
+                  }
+                },
+                "label": "Driver License",
+                "show_type": "bool",
+                "index": 5,
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "gs.val": {
+                        "path": "props.item",
+                        "key": "object/chain",
+                        "selectors": {
+                          "swra__profile": {
+                            "path": "swra__profile.groups.user.:driver"
+                          }
+                        },
+                        "then": {
+                          "key": "common/compareFun",
+                          "compare": "lt",
+                          "to": "driver_license_expiry_date",
+                          "fun": {
+                            "key": "date/Now",
+                            "then": {
+                              "key": "date/FormatDate",
+                              "format": "YYYY-MM-DD"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "car_package": {
+                "per": {
+                  "package_check": {
+                    "key": "condition/bool",
+                    "path": "main.user.apps.swra.org.settings.car_package"
+                  }
+                },
+                "label": "Car Package",
+                "show_type": "bool",
+                "index": 5,
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "gs.val": {
+                        "key": "swra/car_package",
+                        "path": "props.item"
+                      }
+                    }
+                  }
+                }
+              },
+              "driver_pacakge": {
+                "per": {
+                  "package_check": {
+                    "key": "condition/bool",
+                    "path": "main.user.apps.swra.org.settings.car_package"
+                  }
+                },
+                "label": "Driver Package",
+                "show_type": "bool",
+                "index": 5,
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "gs.val": {
+                        "key": "swra/diver_package",
+                        "path": "props.item"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "extra_actions": {
+              "comps": {
+                "approve": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_approvals",
+                  "data": {
+                    "props": {
+                      "_type": "primary"
+                    },
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      },
+                      "no_edit": {
+                        "key": "condition/not",
+                        "path": "props.item.approval"
+                      }
+                    },
+                    "icon": "AiFillCheckCircle",
+                    "model": "swra__daily_plan",
+                    "extra": {
+                      "approval": 1
+                    }
+                  }
+                },
+                "reject": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_approvals",
+                  "data": {
+                    "props": {
+                      "button": {
+                        "danger": true
+                      }
+                    },
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      },
+                      "no_edit": {
+                        "key": "condition/not",
+                        "path": "props.item.approval"
+                      }
+                    },
+                    "icon": "AiFillCloseCircle",
+                    "model": "swra__daily_plan",
+                    "extra": {
+                      "approval": 2
+                    }
+                  }
+                }
+              }
+            },
+            "extra_button": {
+              "wraps": {
+                "condition": {
+                  "key": "condition/bool",
+                  "path": "main.user.apps.swra.org"
+                }
+              },
+              "type": "layout.comps",
+              "comps": {
+                "upload": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_file_upload",
+                  "data": {
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.UPLOAD"
+                      }
+                    },
+                    "accept": ".xlsx,.xls",
+                    "title": "Import Daily Plan",
+                    "extra": {
+                      "org": "main.user.apps.swra.org.id",
+                      "approval": "main.user.apps.swra.org.settings.approval"
+                    },
+                    "params": {
+                      "id": "swra_daily_plan_template"
+                    }
+                  }
+                },
+                "approve_all": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_table_approvals",
+                  "data": {
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      }
+                    },
+                    "text": "Approve All",
+                    "model": "swra__daily_plan",
+                    "_type": "",
+                    "extra": {
+                      "approval": 1
+                    },
+                    "params": {
+                      "approval": 0
+                    }
+                  }
+                },
+                "reject_all": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_table_approvals",
+                  "data": {
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      }
+                    },
+                    "text": "Reject All",
+                    "model": "swra__daily_plan",
+                    "_type": "danger",
+                    "extra": {
+                      "approval": 2
+                    },
+                    "params": {
+                      "approval": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fetch": [
+              "swra__daily_plan",
+              "swra__profile"
+            ],
+            "models": {
+              "swra__daily_plan": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_task",
+        "name": "Daily Tasks",
+        "_index": 42,
+        "app": "swra_admin",
+        "url": "tasks-tasks",
+        "action": {
+          "path": "/tasks-tasks",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineCarryOut"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__task",
+            "fetch": [
+              "swra__task"
+            ],
+            "models": {
+              "swra__task": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_site",
+        "name": "Sites",
+        "_index": 43,
+        "app": "swra_admin",
+        "url": "tasks-sites",
+        "action": {
+          "path": "/tasks-sites",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiFillApi"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "extra_button": {
+              "type": "layout.widget",
+              "w_type": "swra_admin_file_upload",
+              "data": {
+                "accept": ".xlsx,.xls",
+                "title": "Import Sites",
+                "params": {
+                  "id": "swra_sites"
+                }
+              }
+            },
+            "app": "swra__site",
+            "fetch": [
+              "swra__site"
+            ],
+            "models": {
+              "swra__site": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_trip",
+        "name": "Trip",
+        "app": "swra_admin",
+        "url": "tasks-daily-trip",
+        "action": {
+          "path": "/tasks-daily-trip",
+          "key": "route/navigate"
+        },
+        "_index": 42,
+        "icon": {
+          "type": "ai",
+          "name": "AiFillCar"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "create_per": {
+              "admin": {
+                "key": "condition/bool",
+                "path": "main.user.is_admin"
+              }
+            },
+            "app": "swra__trip",
+            "fetch": [
+              "swra__trip"
+            ],
+            "models": {
+              "swra__trip": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_visit",
+        "name": "Visits",
+        "app": "swra_admin",
+        "url": "tasks-daily-visit",
+        "action": {
+          "path": "/tasks-daily-visit",
+          "key": "route/navigate"
+        },
+        "_index": 42,
+        "icon": {
+          "type": "ai",
+          "name": "AiFillCar"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "create_per": {
+              "admin": {
+                "key": "condition/bool",
+                "path": "main.user.is_admin"
+              }
+            },
+            "app": "swra__visit",
+            "fetch": [
+              "swra__visit"
+            ],
+            "extra_actions": {
+              "comps": {
+                "approve": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_approvals",
+                  "data": {
+                    "props": {
+                      "_type": "primary"
+                    },
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      },
+                      "no_edit": {
+                        "key": "condition/not",
+                        "path": "props.item.approval"
+                      }
+                    },
+                    "icon": "AiFillCheckCircle",
+                    "model": "swra__visit",
+                    "extra": {
+                      "approval": 1
+                    }
+                  }
+                },
+                "reject": {
+                  "type": "layout.widget",
+                  "w_type": "swra_admin_approvals",
+                  "data": {
+                    "props": {
+                      "button": {
+                        "danger": true
+                      }
+                    },
+                    "per": {
+                      "she": {
+                        "key": "condition/bool",
+                        "path": "main.user.apps.swra.group.settings.SHE"
+                      },
+                      "no_edit": {
+                        "key": "condition/not",
+                        "path": "props.item.approval"
+                      }
+                    },
+                    "icon": "AiFillCloseCircle",
+                    "model": "swra__visit",
+                    "extra": {
+                      "approval": 2
+                    }
+                  }
+                }
+              }
+            },
+            "models": {
+              "swra__visit": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_car_status",
+        "name": "Car Status",
+        "app": "swra_admin",
+        "url": "tasks-daily-car-status",
+        "action": {
+          "path": "/tasks-daily-car-status",
+          "key": "route/navigate"
+        },
+        "_index": 44,
+        "icon": {
+          "type": "ai",
+          "name": "AiFillCar"
+        },
+        "parent": "sfwra_admin_daily_plan",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "create_per": {
+              "admin": {
+                "key": "condition/bool",
+                "path": "main.user.is_admin"
+              }
+            },
+            "app": "swra__car_status",
+            "fetch": [
+              "swra__car_status"
+            ],
+            "models": {
+              "swra__car_status": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_reports",
+        "name": "Reports",
+        "_index": "6",
+        "action": {
+          "path": "/user",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillDatabase"
+        }
+      },
+      {
+        "id": "sfwra_admin_summary",
+        "name": "Dashboard",
+        "app": "swra_admin",
+        "url": "reports-summary",
+        "icon": {
+          "type": "bi",
+          "name": "AiFillBook"
+        },
+        "parent": "sfwra_admin_reports",
+        "widgets": {
+          "name": "swra_admin_manage",
+          "data": {
+            "app": "auths__user"
+          }
+        }
+      },
+      {
+        "id": "sfwra_admin_bill",
+        "name": "Billing",
+        "_index": "7",
+        "action": {
+          "path": "/user",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillBank"
+        }
+      },
+      {
+        "id": "sfwra_admin_bill_summary",
+        "name": "Dashboard",
+        "app": "swra_admin",
+        "url": "bill-summary",
+        "icon": {
+          "type": "bi",
+          "name": "AiFillControl"
+        },
+        "parent": "sfwra_admin_bill",
+        "widgets": {
+          "name": "swra_admin_manage",
+          "data": {
+            "app": "auths__user"
+          }
+        }
+      },
+      {
+        "id": "swra_admin_product",
+        "name": "product",
+        "action": {
+          "path": "/product-device",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiFillAlert"
+        }
+      },
+      {
+        "id": "swra_admin_device",
+        "name": "device",
+        "app": "swra_admin",
+        "url": "product-device",
+        "action": {
+          "path": "/product-device",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineTool"
+        },
+        "parent": "swra_admin_product",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__device",
+            "fetch": [
+              "swra__device"
+            ],
+            "models": {
+              "swra__device": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_content",
+        "name": "Content",
+        "action": {
+          "path": "/content-field",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineRead"
+        }
+      },
+      {
+        "id": "cms_admin_field",
+        "name": "field",
+        "app": "swra_admin",
+        "url": "content-field",
+        "action": {
+          "path": "/content-field",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineColumnWidth"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__field",
+            "fetch": [
+              "cms__field"
+            ],
+            "models": {
+              "cms__field": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_sector",
+        "name": "sector",
+        "app": "swra_admin",
+        "url": "content-sector",
+        "action": {
+          "path": "/content-sector",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePartition"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "swra__sector",
+            "fetch": [
+              "cms__sector"
+            ],
+            "models": {
+              "cms__sector": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_form",
+        "name": "form",
+        "app": "swra_admin",
+        "url": "content-form",
+        "action": {
+          "path": "/content-form",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineForm"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__form",
+            "fetch": [
+              "cms__form"
+            ],
+            "models": {
+              "cms__form": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_page",
+        "name": "page",
+        "app": "swra_admin",
+        "url": "content-page",
+        "action": {
+          "path": "/content-page",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDesktop"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__page",
+            "fetch": [
+              "cms__page"
+            ],
+            "models": {
+              "cms__page": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_org",
+        "name": "org",
+        "app": "swra_admin",
+        "url": "content-org",
+        "action": {
+          "path": "/content-org",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__org",
+            "fetch": [
+              "cms__org"
+            ],
+            "models": {
+              "cms__org": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_form_data",
+        "name": "form_data",
+        "app": "swra_admin",
+        "url": "content-form_data",
+        "action": {
+          "path": "/content-form_data",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineFund"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__form_data",
+            "fetch": [
+              "cms__form_data"
+            ],
+            "models": {
+              "cms__form_data": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "cms_admin_section",
+        "name": "section",
+        "app": "swra_admin",
+        "url": "content-section",
+        "action": {
+          "path": "/content-section",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineFileText"
+        },
+        "parent": "cms_admin_content",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "cms__section",
+            "fetch": [
+              "cms__section"
+            ],
+            "models": {
+              "cms__section": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_licenses",
+        "name": "Licenses",
+        "action": {
+          "path": "/license-category",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineKey"
+        }
+      },
+      {
+        "id": "license_admin_category",
+        "name": "category",
+        "app": "swra_admin",
+        "url": "license-category",
+        "action": {
+          "path": "/license-category",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineOrderedList"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__category",
+            "fetch": [
+              "license__category"
+            ],
+            "models": {
+              "license__category": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_license",
+        "name": "license",
+        "app": "swra_admin",
+        "url": "license-license",
+        "action": {
+          "path": "/license-license",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineKey"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__license",
+            "fetch": [
+              "license__license"
+            ],
+            "models": {
+              "license__license": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_memberShip",
+        "name": "memberShip",
+        "app": "swra_admin",
+        "url": "license-memberShip",
+        "action": {
+          "path": "/license-memberShip",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineSisternode"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__memberShip",
+            "fetch": [
+              "license__memberShip"
+            ],
+            "models": {
+              "license__memberShip": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_module",
+        "name": "module",
+        "app": "swra_admin",
+        "url": "license-module",
+        "action": {
+          "path": "/license-module",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePieChart"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__module",
+            "fetch": [
+              "license__module"
+            ],
+            "models": {
+              "license__module": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_org",
+        "name": "org",
+        "app": "swra_admin",
+        "url": "license-org",
+        "action": {
+          "path": "/license-org",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__org",
+            "fetch": [
+              "license__org"
+            ],
+            "models": {
+              "license__org": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_payment",
+        "name": "payment",
+        "app": "swra_admin",
+        "url": "license-payment",
+        "action": {
+          "path": "/license-payment",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDollar"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__payment",
+            "fetch": [
+              "license__payment"
+            ],
+            "models": {
+              "license__payment": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "license_admin_currency",
+        "name": "currency",
+        "app": "swra_admin",
+        "url": "license-currency",
+        "action": {
+          "path": "/license-currency",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDollar"
+        },
+        "parent": "license_admin_licenses",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "license__currency",
+            "fetch": [
+              "license__currency"
+            ],
+            "models": {
+              "license__currency": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "stock_admin_stock",
+        "name": "Stock",
+        "action": {
+          "path": "/stock-location",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineStock"
+        }
+      },
+      {
+        "id": "stock_admin_location",
+        "name": "location",
+        "app": "swra_admin",
+        "url": "stock-location",
+        "action": {
+          "path": "/stock-location",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineHome"
+        },
+        "parent": "stock_admin_stock",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "stock__location",
+            "fetch": [
+              "stock__location"
+            ],
+            "models": {
+              "stock__location": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "stock_admin_sub_store",
+        "name": "sub store",
+        "app": "swra_admin",
+        "url": "stock-sub_store",
+        "action": {
+          "path": "/stock-sub_store",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineAppstore"
+        },
+        "parent": "stock_admin_stock",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "stock__sub_store",
+            "fetch": [
+              "stock__sub_store"
+            ],
+            "models": {
+              "stock__sub_store": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "stock_admin_supplier",
+        "name": "supplier",
+        "app": "swra_admin",
+        "url": "stock-supplier",
+        "action": {
+          "path": "/stock-supplier",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineSelect"
+        },
+        "parent": "stock_admin_stock",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "stock__supplier",
+            "fetch": [
+              "stock__supplier"
+            ],
+            "models": {
+              "stock__supplier": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "stock_admin_zones",
+        "name": "zones",
+        "app": "swra_admin",
+        "url": "stock-zones",
+        "action": {
+          "path": "/stock-zones",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineExpand"
+        },
+        "parent": "stock_admin_stock",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "stock__zones",
+            "fetch": [
+              "stock__zones"
+            ],
+            "models": {
+              "stock__zones": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_workflow_parent",
+        "name": "Workflow",
+        "action": {
+          "path": "/workflow-action",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePartition"
+        }
+      },
+      {
+        "id": "workflow_admin_action",
+        "name": "action",
+        "app": "swra_admin",
+        "url": "workflow-action",
+        "action": {
+          "path": "/workflow-action",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineInteraction"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__action",
+            "fetch": [
+              "workflow__action"
+            ],
+            "models": {
+              "workflow__action": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_app",
+        "name": "app",
+        "app": "swra_admin",
+        "url": "workflow-app",
+        "action": {
+          "path": "/workflow-app",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineAppstore"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__app",
+            "fetch": [
+              "workflow__app"
+            ],
+            "models": {
+              "workflow__app": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_field",
+        "name": "field",
+        "app": "swra_admin",
+        "url": "workflow-field",
+        "action": {
+          "path": "/workflow-field",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineBoxPlot"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__field",
+            "fetch": [
+              "workflow__field"
+            ],
+            "models": {
+              "workflow__field": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_group",
+        "name": "group",
+        "app": "swra_admin",
+        "url": "workflow-group",
+        "action": {
+          "path": "/workflow-group",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineGroup"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__group",
+            "fetch": [
+              "workflow__group"
+            ],
+            "models": {
+              "workflow__group": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_module",
+        "name": "module",
+        "app": "swra_admin",
+        "url": "workflow-module",
+        "action": {
+          "path": "/workflow-module",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePieChart"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__module",
+            "fetch": [
+              "workflow__module"
+            ],
+            "models": {
+              "workflow__module": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_org",
+        "name": "org",
+        "app": "swra_admin",
+        "url": "workflow-org",
+        "action": {
+          "path": "/workflow-org",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__org",
+            "fetch": [
+              "workflow__org"
+            ],
+            "models": {
+              "workflow__org": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_section",
+        "name": "section",
+        "app": "swra_admin",
+        "url": "workflow-section",
+        "action": {
+          "path": "/workflow-section",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineFileText"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__section",
+            "fetch": [
+              "workflow__section"
+            ],
+            "models": {
+              "workflow__section": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_step",
+        "name": "step",
+        "app": "swra_admin",
+        "url": "workflow-step",
+        "action": {
+          "path": "/workflow-step",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineArrowRight"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__step",
+            "fetch": [
+              "workflow__step"
+            ],
+            "models": {
+              "workflow__step": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_subhistory",
+        "name": "subhistory",
+        "app": "swra_admin",
+        "url": "workflow-subhistory",
+        "action": {
+          "path": "/workflow-subhistory",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineHistory"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__subhistory",
+            "fetch": [
+              "workflow__subhistory"
+            ],
+            "models": {
+              "workflow__subhistory": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_submission",
+        "name": "submission",
+        "app": "swra_admin",
+        "url": "workflow-submission",
+        "action": {
+          "path": "/workflow-submission",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineSend"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__submission",
+            "fetch": [
+              "workflow__submission"
+            ],
+            "models": {
+              "workflow__submission": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_submission_data",
+        "name": "submission_data",
+        "app": "swra_admin",
+        "url": "workflow-submission_data",
+        "action": {
+          "path": "/workflow-submission_data",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDatabase"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__submission_data",
+            "fetch": [
+              "workflow__submission_data"
+            ],
+            "models": {
+              "workflow__submission_data": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "workflow_admin_workflow",
+        "name": "workflow",
+        "app": "swra_admin",
+        "url": "workflow-workflow",
+        "action": {
+          "path": "/workflow-workflow",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePartition"
+        },
+        "parent": "workflow_admin_workflow_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "workflow__workflow",
+            "fetch": [
+              "workflow__workflow"
+            ],
+            "models": {
+              "workflow__workflow": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "profile_admin_profile",
+        "name": "profile",
+        "action": {
+          "path": "/profile-address",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        }
+      },
+      {
+        "id": "profile_admin_address",
+        "name": "address",
+        "app": "swra_admin",
+        "url": "profile-address",
+        "action": {
+          "path": "/profile-address",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineHome"
+        },
+        "parent": "profile_admin_profile",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "profile__address",
+            "fetch": [
+              "profile__address"
+            ],
+            "models": {
+              "profile__address": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "profile_admin_card",
+        "name": "card",
+        "app": "swra_admin",
+        "url": "profile-card",
+        "action": {
+          "path": "/profile-card",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineCreditCard"
+        },
+        "parent": "profile_admin_profile",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "profile__card",
+            "fetch": [
+              "profile__card"
+            ],
+            "models": {
+              "profile__card": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "profile_admin_contact",
+        "name": "contact",
+        "app": "swra_admin",
+        "url": "profile-contact",
+        "action": {
+          "path": "/profile-contact",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlinePhone"
+        },
+        "parent": "profile_admin_profile",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "profile__contact",
+            "fetch": [
+              "profile__contact"
+            ],
+            "models": {
+              "profile__contact": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "profile_admin_main",
+        "name": "main",
+        "app": "swra_admin",
+        "url": "profile-main",
+        "action": {
+          "path": "/profile-main",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineHighlight"
+        },
+        "parent": "profile_admin_profile",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "profile__main",
+            "fetch": [
+              "profile__main"
+            ],
+            "models": {
+              "profile__main": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "profile_admin_relation",
+        "name": "relation",
+        "app": "swra_admin",
+        "url": "profile-relation",
+        "action": {
+          "path": "/profile-relation",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineLineChart"
+        },
+        "parent": "profile_admin_profile",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "profile__relation",
+            "fetch": [
+              "profile__relation"
+            ],
+            "models": {
+              "profile__relation": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "store_admin_store_parent",
+        "name": "Store",
+        "action": {
+          "path": "/store-category",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineAppstore"
+        }
+      },
+      {
+        "id": "store_admin_category",
+        "name": "category",
+        "app": "swra_admin",
+        "url": "store-category",
+        "action": {
+          "path": "/store-category",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineOrderedList"
+        },
+        "parent": "store_admin_store_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "store__category",
+            "fetch": [
+              "store__category"
+            ],
+            "models": {
+              "store__category": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "store_admin_store",
+        "name": "store",
+        "app": "swra_admin",
+        "url": "store-store",
+        "action": {
+          "path": "/store-store",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineAppstore"
+        },
+        "parent": "store_admin_store_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "store__store",
+            "fetch": [
+              "store__store"
+            ],
+            "models": {
+              "store__store": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "store_admin_type",
+        "name": "type",
+        "app": "swra_admin",
+        "url": "store-type",
+        "action": {
+          "path": "/store-type",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineSortAscending"
+        },
+        "parent": "store_admin_store_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "store__type",
+            "fetch": [
+              "store__type"
+            ],
+            "models": {
+              "store__type": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "store_admin_unit",
+        "name": "unit",
+        "app": "swra_admin",
+        "url": "store-unit",
+        "action": {
+          "path": "/store-unit",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineMinusSquare"
+        },
+        "parent": "store_admin_store_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "store__unit",
+            "fetch": [
+              "store__unit"
+            ],
+            "models": {
+              "store__unit": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "store_admin_zone",
+        "name": "zone",
+        "app": "swra_admin",
+        "url": "store-zone",
+        "action": {
+          "path": "/store-zone",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineExpand"
+        },
+        "parent": "store_admin_store_parent",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "store__zone",
+            "fetch": [
+              "store__zone"
+            ],
+            "models": {
+              "store__zone": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "wallet_admin_wallet",
+        "name": "wallet",
+        "action": {
+          "path": "/wallet-account",
+          "key": "route/navigate"
+        },
+        "app": "swra_admin",
+        "_index": 3,
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineWallet"
+        }
+      },
+      {
+        "id": "wallet_admin_account",
+        "name": "account",
+        "app": "swra_admin",
+        "url": "wallet-account",
+        "action": {
+          "path": "/wallet-account",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDatabase"
+        },
+        "parent": "wallet_admin_wallet",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "wallet__account",
+            "fetch": [
+              "wallet__account"
+            ],
+            "models": {
+              "wallet__account": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "wallet_admin_category",
+        "name": "category",
+        "app": "swra_admin",
+        "url": "wallet-category",
+        "action": {
+          "path": "/wallet-category",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineOrderedList"
+        },
+        "parent": "wallet_admin_wallet",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "wallet__category",
+            "fetch": [
+              "wallet__category"
+            ],
+            "models": {
+              "wallet__category": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "wallet_admin_history",
+        "name": "history",
+        "app": "swra_admin",
+        "url": "wallet-history",
+        "action": {
+          "path": "/wallet-history",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineHistory"
+        },
+        "parent": "wallet_admin_wallet",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "wallet__history",
+            "fetch": [
+              "wallet__history"
+            ],
+            "models": {
+              "wallet__history": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "wallet_admin_transaction",
+        "name": "transaction",
+        "app": "swra_admin",
+        "url": "wallet-transaction",
+        "action": {
+          "path": "/wallet-transaction",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineSend"
+        },
+        "parent": "wallet_admin_wallet",
+        "widgets": {
+          "w_type": "swra_admin_manage",
+          "data": {
+            "app": "wallet__transaction",
+            "fetch": [
+              "wallet__transaction"
+            ],
+            "models": {
+              "wallet__transaction": {}
+            }
+          }
+        }
+      }
+    ],
+    "apps__files": [
+      {
+        "id": "swra_daily_plan_template",
+        "type": "excel"
+      },
+      {
+        "id": "swra_sites",
+        "type": "excel"
+      }
+    ],
+    "apps__sheets": [
+      {
+        "id": "swra_site",
+        "name": "Sites",
+        "ident": "code",
+        "model": "swra__site",
+        "app": "swra_admin",
+        "file": "swra_sites"
+      },
+      {
+        "id": "swra_daily_plan",
+        "name": "Daily Plan",
+        "ident": "code",
+        "model": "swra__daily_plan",
+        "links": {
+          "site": {
+            "model": "swra__site",
+            "query": {
+              "code": "site id"
+            }
+          },
+          "driver": {
+            "model": "auth__user",
+            "query": {
+              "login_code": "driver code"
+            }
+          },
+          "audit": {
+            "model": "auth__user",
+            "query": {
+              "login_code": "auditor code"
+            }
+          },
+          "active_user": {
+            "model": "auth__user",
+            "query": {
+              "login_code": "active user"
+            }
+          },
+          "car": {
+            "model": "swra__car",
+            "query": {
+              "plate": "car plat number"
+            }
+          }
+        },
+        "mapping": {
+          "project_name": "project name",
+          "SOW_description": "sow description",
+          "electric_work": "electric work",
+          "risk_priority": "risk priority",
+          "start_time": "start time",
+          "site_contact": "site contact",
+          "VF_task_owner": "vf task owner",
+          "contact_number": "contact number"
+        },
+        "vals": {
+          "visit_date": {
+            "key": "date",
+            "col": "[date]",
+            "format": "Ymd"
+          },
+          "code": {
+            "key": "joining",
+            "picks": [
+              "[site id]",
+              "[visit_date]",
+              "[org_code]"
+            ]
+          }
+        },
+        "app": "swra_admin",
+        "file": "swra_daily_plan_template"
+      }
+    ],
+    "apps__init": [
+      {
+        "id": "swra__swra__profile",
+        "model": "swra__profile",
+        "app": "swra_admin",
+        "groups": {
+          "user": {
+            "user": "user"
+          }
+        }
+      }
+    ],
+    "apps__model": [
+      {
+        "id": "license__license__category",
+        "path": "license__category",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "level",
+            "_index",
+            "weight",
+            "actions"
+          ],
+          "models": [
+            "license__category"
+          ]
+        }
+      },
+      {
+        "id": "license__license__license",
+        "path": "license__license",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "start",
+            "end",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "license__license"
+          ]
+        }
+      },
+      {
+        "id": "license__license__memberShip",
+        "path": "license__memberShip",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "type",
+            "time",
+            "value",
+            "actions"
+          ],
+          "models": [
+            "license__memberShip"
+          ]
+        }
+      },
+      {
+        "id": "license__license__module",
+        "path": "license__module",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "actions"
+          ],
+          "models": [
+            "license__module"
+          ]
+        }
+      },
+      {
+        "id": "license__license__org",
+        "path": "license__org",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "register_code",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "license__org"
+          ]
+        }
+      },
+      {
+        "id": "license__license__payment",
+        "path": "license__payment",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "date",
+            "amount",
+            "method",
+            "actions"
+          ],
+          "models": [
+            "license__payment"
+          ]
+        }
+      },
+      {
+        "id": "license__license__currency",
+        "path": "license__currency",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "symbol",
+            "code",
+            "actions"
+          ],
+          "models": [
+            "license__currency"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__field",
+        "path": "cms__field",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "type",
+            "label",
+            "placeholder",
+            "actions"
+          ],
+          "models": [
+            "cms__field"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__sector",
+        "path": "cms__sector",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "page",
+            "title",
+            "content",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "cms__sector"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__form",
+        "path": "cms__form",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "comp",
+            "actions"
+          ],
+          "models": [
+            "cms__form"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__page",
+        "path": "cms__page",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "title",
+            "desc",
+            "url",
+            "publish",
+            "keywords",
+            "actions"
+          ],
+          "models": [
+            "cms__page"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__org",
+        "path": "cms__org",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "website_url",
+            "sub_plan",
+            "start",
+            "actions"
+          ],
+          "models": [
+            "cms__org"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__form_data",
+        "path": "cms__form_data",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "date",
+            "actions"
+          ],
+          "models": [
+            "cms__form_data"
+          ]
+        }
+      },
+      {
+        "id": "cms__cms__section",
+        "path": "cms__section",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "type",
+            "title",
+            "comp",
+            "actions"
+          ],
+          "models": [
+            "cms__section"
+          ]
+        }
+      },
+      {
+        "id": "stock__stock__location",
+        "path": "stock__location",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "stock__location"
+          ]
+        }
+      },
+      {
+        "id": "stock__stock__sub_store",
+        "path": "stock__sub_store",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "stock__sub_store"
+          ]
+        }
+      },
+      {
+        "id": "stock__stock__supplier",
+        "path": "stock__supplier",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "phone",
+            "email",
+            "category",
+            "register",
+            "tax_card",
+            "trade_register",
+            "actions"
+          ],
+          "models": [
+            "stock__supplier"
+          ]
+        }
+      },
+      {
+        "id": "stock__stock__zones",
+        "path": "stock__zones",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "shape",
+            "width",
+            "height",
+            "capacity",
+            "tags",
+            "actions"
+          ],
+          "models": [
+            "stock__zones"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__action",
+        "path": "workflow__action",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "workflow__action"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__app",
+        "path": "workflow__app",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "url",
+            "actions"
+          ],
+          "models": [
+            "workflow__app"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__field",
+        "path": "workflow__field",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "label",
+            "_type",
+            "placeholder",
+            "actions"
+          ],
+          "models": [
+            "workflow__field"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__group",
+        "path": "workflow__group",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "actions"
+          ],
+          "models": [
+            "workflow__group"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__module",
+        "path": "workflow__module",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "url",
+            "key",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "workflow__module"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__org",
+        "path": "workflow__org",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "settings",
+            "actions"
+          ],
+          "models": [
+            "workflow__org"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__section",
+        "path": "workflow__section",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "model",
+            "title",
+            "summary_widget",
+            "actions"
+          ],
+          "models": [
+            "workflow__section"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__step",
+        "path": "workflow__step",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "_index",
+            "delegate_after_days",
+            "actions"
+          ],
+          "models": [
+            "workflow__step"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__subhistory",
+        "path": "workflow__subhistory",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "date",
+            "actions"
+          ],
+          "models": [
+            "workflow__subhistory"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__submission",
+        "path": "workflow__submission",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "code",
+            "print_url",
+            "status",
+            "actions"
+          ],
+          "models": [
+            "workflow__submission"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__submission_data",
+        "path": "workflow__submission_data",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "key",
+            "_index",
+            "date",
+            "status",
+            "actions"
+          ],
+          "models": [
+            "workflow__submission_data"
+          ]
+        }
+      },
+      {
+        "id": "workflow__workflow__workflow",
+        "path": "workflow__workflow",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "print_url",
+            "url",
+            "active",
+            "actions"
+          ],
+          "models": [
+            "workflow__workflow"
+          ]
+        }
+      },
+      {
+        "id": "profile__profile__address",
+        "path": "profile__address",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "active",
+            "name",
+            "actions"
+          ],
+          "models": [
+            "profile__address"
+          ]
+        }
+      },
+      {
+        "id": "profile__profile__card",
+        "path": "profile__card",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "type",
+            "number",
+            "pass",
+            "token",
+            "valid",
+            "actions"
+          ],
+          "models": [
+            "profile__card"
+          ]
+        }
+      },
+      {
+        "id": "profile__profile__contact",
+        "path": "profile__contact",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "contact",
+            "verify",
+            "type",
+            "active",
+            "actions"
+          ],
+          "models": [
+            "profile__contact"
+          ]
+        }
+      },
+      {
+        "id": "profile__profile__main",
+        "path": "profile__main",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "first_name",
+            "last_name",
+            "primary_email",
+            "primary_phone",
+            "dob",
+            "actions"
+          ],
+          "models": [
+            "profile__main"
+          ]
+        }
+      },
+      {
+        "id": "profile__profile__relation",
+        "path": "profile__relation",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "from_profile",
+            "to_profile",
+            "type",
+            "date",
+            "actions"
+          ],
+          "models": [
+            "profile__relation"
+          ]
+        }
+      },
+      {
+        "id": "store__store__category",
+        "path": "store__category",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "store__category"
+          ]
+        }
+      },
+      {
+        "id": "store__store__store",
+        "path": "store__store",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "store__store"
+          ]
+        }
+      },
+      {
+        "id": "store__store__type",
+        "path": "store__type",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "store__type"
+          ]
+        }
+      },
+      {
+        "id": "store__store__unit",
+        "path": "store__unit",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "_index",
+            "capacity",
+            "actions"
+          ],
+          "models": [
+            "store__unit"
+          ]
+        }
+      },
+      {
+        "id": "store__store__zone",
+        "path": "store__zone",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "_index",
+            "actions"
+          ],
+          "models": [
+            "store__zone"
+          ]
+        }
+      },
+      {
+        "id": "wallet__wallet__account",
+        "path": "wallet__account",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "amount",
+            "phone",
+            "email",
+            "actions"
+          ],
+          "models": [
+            "wallet__account"
+          ]
+        }
+      },
+      {
+        "id": "wallet__wallet__category",
+        "path": "wallet__category",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "name",
+            "code",
+            "actions"
+          ],
+          "models": [
+            "wallet__category"
+          ]
+        }
+      },
+      {
+        "id": "wallet__wallet__history",
+        "path": "wallet__history",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "amount",
+            "date",
+            "type",
+            "actions"
+          ],
+          "models": [
+            "wallet__history"
+          ]
+        }
+      },
+      {
+        "id": "wallet__wallet__transaction",
+        "path": "wallet__transaction",
+        "app": "swra_admin",
+        "props": {
+          "view": [
+            "type",
+            "sub_type",
+            "amount",
+            "actions"
+          ],
+          "models": [
+            "wallet__transaction"
+          ]
+        }
+      }
+    ]
+  },
+  "reset": true
+}

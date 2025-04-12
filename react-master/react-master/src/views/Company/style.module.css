@@ -1,0 +1,74 @@
+.divSty {
+  background-color: #fff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  padding: 30px 50px;
+  min-height: 160px;
+  cursor: pointer;
+}
+.divSty img {
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+}
+.divSty i {
+  color: #2196f3;
+  font-size: 40px;
+}
+.divSty span {
+  font-family: "IBM Plex Sans";
+  font-size: 22px;
+  color: #012547;
+  font-weight: bold;
+}
+.divSty div {
+  font-family: "NeusaNextPro";
+  color: #455054;
+  font-size: 12px;
+  margin-top: 10px;
+}
+@media only screen and (min-width: 576px) {
+  .divSty {
+    padding: 30px;
+  }
+
+  .divSty span {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .divSty {
+    padding: 30px 50px;
+  }
+
+  .divSty span {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .divSty {
+    padding: 30px;
+    min-height: 180px;
+  }
+
+  .divSty span {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .divSty {
+    padding: 30px 50px;
+    min-height: 180px;
+  }
+
+  .divSty span {
+    font-size: 20px;
+  }
+}

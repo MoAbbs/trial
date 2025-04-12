@@ -1,0 +1,2061 @@
+{
+  "data": {
+    "apps__app": [
+      {
+        "id": "buznsi_admin",
+        "name": "SafeWra Admin",
+        "models": {}
+      }
+    ],
+    "apps__widget": [
+      {
+        "id": "buznsi_admin_field",
+        "app": "buznsi_admin",
+        "wraps": {
+          "condition": {
+            "key": "list/Every",
+            "funs": "${per}"
+          }
+        },
+        "comp": {
+          "type": "common.input"
+        },
+        "props": {
+          "placeholder": "${ph}",
+          "label": "${label}",
+          "_type": "${_type}",
+          "name": "${model}",
+          "props": "${props}"
+        }
+      },
+      {
+        "id": "buznsi_admin_header",
+        "app": "buznsi_admin",
+        "comps": {
+          "body": {
+            "wraps": {
+              "route": {}
+            },
+            "type": "layout.style",
+            "s_class": "home/header.module.less",
+            "comps": {
+              "logo": {
+                "type": "common.image",
+                "extra": {
+                  "preview": false
+                },
+                "width": 70,
+                "image": {
+                  "key": "request/publicFile",
+                  "file": "buznsi.png"
+                }
+              },
+              "title": {
+                "wraps": {
+                  "connect": {
+                    "module": {
+                      "key": "list/Find",
+                      "path": "apps__module.data",
+                      "params": {
+                        "url": "props.match.params.module"
+                      },
+                      "then": {
+                        "key": "strings/replaceTemplate",
+                        "str": "apps__module.data.:id"
+                      }
+                    }
+                  },
+                  "route": {}
+                },
+                "type": "layout.style",
+                "props": {
+                  "cs": "title"
+                },
+                "picks": [
+                  "module"
+                ],
+                "comps": {
+                  "icon": {
+                    "type": "common.icon",
+                    "type_fun": {
+                      "path": "props.module.icon"
+                    }
+                  },
+                  "text": {
+                    "type": "common.text",
+                    "_type": "Title",
+                    "fun": {
+                      "path": "props.module.name"
+                    }
+                  }
+                }
+              },
+              "btns": {
+                "type": "layout.style",
+                "props": {
+                  "cs": "btn"
+                },
+                "comps": {
+                  "apps": {
+                    "wraps": {
+                      "route": {}
+                    },
+                    "action": {
+                      "key": "route/replace",
+                      "path": "/home"
+                    },
+                    "type": "common.button",
+                    "_type": "link",
+                    "comps": {
+                      "icon": {
+                        "type": "common.icon",
+                        "_type": "ai",
+                        "name": "AiFillAppstore"
+                      }
+                    }
+                  },
+                  "profile": {
+                    "type": "common.popover",
+                    "_type": "link",
+                    "shape": "circle",
+                    "pop": {
+                      "trigger": "click"
+                    },
+                    "content": {
+                      "comp": "layout.style",
+                      "s_class": "home/profile.module.less",
+                      "comps": {
+                        "profile": {
+                          "type": "common.button",
+                          "_type": "text",
+                          "text": "profile"
+                        },
+                        "logout": {
+                          "wraps": {
+                            "route": []
+                          },
+                          "type": "common.button",
+                          "_type": "text",
+                          "text": "Logout",
+                          "action": {
+                            "key": "store/Dispatching",
+                            "dis": [
+                              {
+                                "type": "reset_all_main",
+                                "data": {}
+                              }
+                            ],
+                            "then": {
+                              "key": "route/replace",
+                              "path": "/login"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comps": {
+                      "avatar": {
+                        "type": "common.avatar",
+                        "fun": {
+                          "path": "main.user.name.first_name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_home",
+        "app": "buznsi_admin",
+        "comps": {
+          "header": {
+            "type": "layout.widget",
+            "w_type": "buznsi_admin_header"
+          },
+          "body": {
+            "type": "layout.style",
+            "s_class": "home/home.module.less",
+            "comps": {
+              "body": {
+                "type": "layout.style",
+                "cs": "list",
+                "comps": {
+                  "list": {
+                    "type": "common.normal_list",
+                    "picks": [
+                      "classes"
+                    ],
+                    "fun": {
+                      "key": "list/Reject",
+                      "path": "props.list",
+                      "params": {
+                        "url": "home"
+                      },
+                      "then": {
+                        "key": "list/SortBy",
+                        "keys": [
+                          "_index"
+                        ]
+                      }
+                    },
+                    "wraps": {
+                      "connect": {
+                        "list": "${fun}"
+                      }
+                    },
+                    "card": {
+                      "comp": "common.button",
+                      "_type": "text",
+                      "wraps": {
+                        "route": {}
+                      },
+                      "action": {
+                        "key": "common/RunDataFunction",
+                        "path": "props.item",
+                        "fun": "action"
+                      },
+                      "picks": [
+                        "classes"
+                      ],
+                      "cs": "item",
+                      "comps": {
+                        "icon": {
+                          "type": "common.icon",
+                          "type_fun": {
+                            "key": "common/noop",
+                            "path": "props.item.icon"
+                          }
+                        },
+                        "title": {
+                          "type": "common.text",
+                          "_type": "Title",
+                          "fun": {
+                            "key": "common/noop",
+                            "path": "props.item.name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_login",
+        "app": "buznsi_admin",
+        "s_class": "home/login.module.less",
+        "wraps": {
+          "Form": {
+            "init": {
+              "key": "common/resetData",
+              "reset": {
+                "app": "swra"
+              },
+              "then": {
+                "key": "store/inited"
+              }
+            },
+            "onSubmit": {
+              "key": "request/login",
+              "fail": {
+                "key": "object/StateSelector",
+                "path": "error.response.data.msg",
+                "then": {
+                  "key": "msg/alert",
+                  "type": "error"
+                }
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_main_main",
+                "then": {
+                  "key": "route/QueryParams",
+                  "param": "module",
+                  "default": "home",
+                  "then": {
+                    "key": "strings/prefix",
+                    "prefix": "/",
+                    "then": {
+                      "key": "route/replace"
+                    }
+                  }
+                }
+              }
+            },
+            "form": {
+              "size": "large",
+              "labelCol": {
+                "span": 4
+              },
+              "wrapperCol": {
+                "span": 20
+              }
+            }
+          },
+          "route": {}
+        },
+        "comp": {
+          "type": "layout.style"
+        },
+        "comps": {
+          "body": {
+            "type": "layout.style",
+            "props": {
+              "cs": "body"
+            },
+            "comps": {
+              "logo": {
+                "type": "layout.style",
+                "props": {
+                  "cs": "img"
+                },
+                "comps": {
+                  "img": {
+                    "type": "common.image",
+                    "extra": {
+                      "preview": false
+                    },
+                    "image": {
+                      "key": "request/publicFile",
+                      "file": "buznsi.png"
+                    }
+                  }
+                }
+              },
+              "username": {
+                "ph": "Input Username",
+                "type": "layout.widget",
+                "w_type": "buznsi_admin_field",
+                "data": {
+                  "label": "Email",
+                  "_type": "text",
+                  "model": "username",
+                  "validates": {
+                    "required": true
+                  }
+                }
+              },
+              "password": {
+                "ph": "Input Password",
+                "type": "layout.widget",
+                "w_type": "buznsi_admin_field",
+                "data": {
+                  "label": "Password",
+                  "_type": "password",
+                  "model": "password",
+                  "validates": {
+                    "required": true
+                  }
+                }
+              },
+              "btns": {
+                "type": "common.input",
+                "_type": "design.master",
+                "item": {
+                  "wrapperCol": {
+                    "offset": 8
+                  }
+                },
+                "props": {
+                  "comps": {
+                    "submit": {
+                      "type": "common.button",
+                      "text": "Login",
+                      "_type": "primary",
+                      "htmlType": "submit",
+                      "action": {
+                        "key": "form/Action"
+                      }
+                    },
+                    "forget": {
+                      "wraps": {
+                        "route": {}
+                      },
+                      "type": "common.button",
+                      "text": "Forget Password",
+                      "_type": "text",
+                      "action": {
+                        "key": "route/navigate",
+                        "path": "/forget-pass"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_buttons",
+        "app": "buznsi_admin",
+        "comps": {
+          "list": {
+            "type": "common.normal_list",
+            "wraps": {
+              "route": []
+            },
+            "fun": "${fun}",
+            "card": {
+              "comp": "common.condition",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "apps__module.groups.parent.$[props.item.id]"
+              },
+              "success": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.button",
+                    "_type": "text",
+                    "picks": [
+                      "item"
+                    ],
+                    "comps": {
+                      "icon": {
+                        "type_fun": {
+                          "key": "common/noop",
+                          "path": "props.item.icon"
+                        }
+                      },
+                      "label": {
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.button",
+                    "_type": "text",
+                    "s_class": "home/sider.module.less",
+                    "action": {
+                      "key": "common/RunDataFunction",
+                      "fun": "action",
+                      "path": "props.item"
+                    },
+                    "picks": [
+                      "item"
+                    ],
+                    "wraps": {
+                      "ClassName": {
+                        "fun": {
+                          "path": "props.match.params",
+                          "key": "common/condition_fun",
+                          "fun": {
+                            "key": "common/compare",
+                            "val": "props.item.url",
+                            "to": "module"
+                          },
+                          "success": "active",
+                          "fail": ""
+                        }
+                      },
+                      "route": {}
+                    },
+                    "comps": {
+                      "icon": {
+                        "type": "common.icon",
+                        "type_fun": {
+                          "key": "common/noop",
+                          "path": "props.item.icon"
+                        }
+                      },
+                      "text": {
+                        "type": "common.label",
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_manage",
+        "app": "buznsi_admin",
+        "comps": {
+          "header": {
+            "type": "layout.widget",
+            "w_type": "buznsi_admin_header"
+          },
+          "body": {
+            "type": "layout.style",
+            "s_class": "home/home.module.less",
+            "comps": {
+              "sider": {
+                "type": "layout.widget",
+                "w_type": "buznsi_admin_sider",
+                "data": {
+                  "fun": {
+                    "key": "object/StateSelector",
+                    "path": "apps__module.groups.url.$[props.match.params.module]",
+                    "then": {
+                      "key": "object/GetMainParent",
+                      "path": "apps__module",
+                      "then": {
+                        "key": "object/chain",
+                        "selectors": {
+                          "apps": {
+                            "path": "apps__module.groups.parent.:id"
+                          }
+                        },
+                        "then": {
+                          "key": "list/ToArray"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "table": {
+                "type": "layout.main",
+                "_type": "Content",
+                "s_class": "home/content.module.less",
+                "wraps": {
+                  "Fetch": {
+                    "fetch": "${fetch}"
+                  }
+                },
+                "comps": {
+                  "btns": {
+                    "type": "layout.style",
+                    "s_class": "admin/btns.module.less",
+                    "comps": {
+                      "create": {
+                        "type": "common.button",
+                        "text": "Create New",
+                        "_type": "",
+                        "action": {
+                          "key": "store/Dispatching",
+                          "dis": [
+                            {
+                              "type": "set_main_popup",
+                              "data": {
+                                "popup": {
+                                  "type": "side",
+                                  "cs": "side",
+                                  "s_class": "side/container.module.less",
+                                  "side": {
+                                    "placement": "right",
+                                    "theme": "dark",
+                                    "title": "Main Form"
+                                  },
+                                  "app": "${app}",
+                                  "headers": {
+                                    "cancel": {
+                                      "type": "common.button",
+                                      "_type": "",
+                                      "text": "Cancel",
+                                      "action": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "props.close"
+                                      }
+                                    },
+                                    "submit": {
+                                      "text": "Save",
+                                      "type": "common.button",
+                                      "action": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "form.main.submitForm",
+                                        "then": {
+                                          "key": "common/executeStateFun",
+                                          "fun": "props.close"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "body": {
+                                    "comp": "layout.widget",
+                                    "w_type": "buznsi_admin_popup_create",
+                                    "data": {
+                                      "app": "${app}",
+                                      "models": "${models}"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "extra_button": "${extra_button}"
+                    }
+                  },
+                  "list": {
+                    "type": "layout.widget",
+                    "w_type": "buznsi_admin_table",
+                    "data": {
+                      "app": "${app}",
+                      "fun": "${fun}",
+                      "actions": {
+                        "comps": {
+                          "edit": {
+                            "type": "common.button",
+                            "_type": "",
+                            "action": {
+                              "key": "object/mapParams",
+                              "params": {
+                                "item": "props.item",
+                                "type": "side",
+                                "cs": "side",
+                                "s_class": "side/container.module.less",
+                                "side": {
+                                  "placement": "right",
+                                  "theme": "dark",
+                                  "title": "Main Form"
+                                },
+                                "app": "${app}",
+                                "headers": {
+                                  "cancel": {
+                                    "type": "common.button",
+                                    "_type": "",
+                                    "text": "Cancel",
+                                    "action": {
+                                      "key": "common/executeStateFun",
+                                      "fun": "props.close"
+                                    }
+                                  },
+                                  "submit": {
+                                    "text": "Save",
+                                    "type": "common.button",
+                                    "action": {
+                                      "key": "common/executeStateFun",
+                                      "fun": "form.main.submitForm",
+                                      "then": {
+                                        "key": "common/executeStateFun",
+                                        "fun": "props.close"
+                                      }
+                                    }
+                                  }
+                                },
+                                "body": {
+                                  "comp": "layout.widget",
+                                  "w_type": "buznsi_admin_popup_create",
+                                  "data": {
+                                    "app": "${app}",
+                                    "models": "${models}"
+                                  }
+                                }
+                              },
+                              "then": {
+                                "key": "object/addKeys",
+                                "keys": [
+                                  "popup"
+                                ],
+                                "then": {
+                                  "key": "store/Dispatching",
+                                  "fun": "set_main_popup"
+                                }
+                              }
+                            },
+                            "icon": {
+                              "type": "ai",
+                              "name": "AiOutlineEdit"
+                            }
+                          }
+                        }
+                      },
+                      "extra_actions": "${extra_actions}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_menu",
+        "app": "buznsi_admin",
+        "comps": {
+          "list": {
+            "type": "common.normal_list",
+            "fun": "${fun}",
+            "card": {
+              "comp": "common.condition",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "apps__module.groups.parent.$[props.item.id]"
+              },
+              "success": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.sub_menu",
+                    "_type": "SubMenu",
+                    "picks": [
+                      "item"
+                    ],
+                    "icon": {
+                      "type_fun": {
+                        "key": "common/noop",
+                        "path": "props.item.icon"
+                      }
+                    },
+                    "label": {
+                      "fun": {
+                        "key": "common/noop",
+                        "path": "props.item.name"
+                      }
+                    },
+                    "comps": {
+                      "menu": {
+                        "type": "layout.widget",
+                        "w_type": "buznsi_admin_menu",
+                        "picks": [
+                          "item"
+                        ],
+                        "data": {
+                          "fun": {
+                            "key": "object/StateSelector",
+                            "path": "apps__module.groups.parent.$[props.item.id]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "fail": {
+                "picks": [
+                  "item"
+                ],
+                "comps": {
+                  "menu": {
+                    "type": "common.menu_item",
+                    "_type": "Item",
+                    "picks": [
+                      "item"
+                    ],
+                    "icon": {
+                      "type_fun": {
+                        "key": "common/noop",
+                        "path": "props.item.icon"
+                      }
+                    },
+                    "comps": {
+                      "text": {
+                        "type": "common.label",
+                        "fun": {
+                          "key": "common/noop",
+                          "path": "props.item.name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_popup_fields",
+        "app": "buznsi_admin",
+        "comps": {
+          "body": {
+            "wraps": {
+              "fields": {
+                "type": "apply",
+                "key": "common/resetData",
+                "reset": {
+                  "fields": "${fields}"
+                }
+              },
+              "funs": {
+                "type": "apply",
+                "key": "object/Pick",
+                "picks": [
+                  "props.submitForm",
+                  "props.validateForm"
+                ],
+                "then": {
+                  "key": "store/Dispatching",
+                  "fun": "set_path_popup",
+                  "params": {
+                    "path": "form"
+                  }
+                }
+              },
+              "Form": {
+                "onSubmit": "${onSubmit}",
+                "init": "${init_value}"
+              }
+            },
+            "type": "layout.style",
+            "picks": [
+              "fields"
+            ],
+            "comps": {
+              "fields": {
+                "type": "common.normal_list",
+                "fun": {
+                  "key": "list/ToArray",
+                  "path": "props.fields"
+                },
+                "card": {
+                  "comp": "common.fun",
+                  "fun": {
+                    "path": "props.item"
+                  }
+                },
+                "wraps": {
+                  "route": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_sider",
+        "app": "buznsi_admin",
+        "comps": {
+          "body": {
+            "type": "layout.main",
+            "_type": "Sider",
+            "s_class": "home/sider.module.less",
+            "extra": {
+              "width": 200,
+              "collapsible": true
+            },
+            "comps": {
+              "menu": {
+                "wraps": {
+                  "route": {}
+                },
+                "type": "layout.widget",
+                "w_type": "buznsi_admin_buttons",
+                "data": {
+                  "fun": "${fun}"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_table",
+        "app": "buznsi_admin",
+        "comps": {
+          "body": {
+            "type": "layout.style",
+            "_type": "Sider",
+            "s_class": "home/table.module.less",
+            "comps": {
+              "table": {
+                "wraps": {
+                  "list_filter": {
+                    "type": "apply",
+                    "key": "common/multiApply",
+                    "apps": {
+                      "list": {
+                        "key": "object/StateSelector",
+                        "path": "props",
+                        "then": {
+                          "key": "common/RunDataFunction",
+                          "fun": "fun"
+                        }
+                      }
+                    }
+                  },
+                  "BuildTable": {
+                    "app": "${app}",
+                    "actions": "${actions}",
+                    "extra_actions": "${extra_actions}"
+                  },
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "fields": {
+                        "path": "fields.data.${app}.fields"
+                      },
+                      "extra_fields": {
+                        "path": "fields.data.${app}.extra_fields"
+                      },
+                      "extra": {
+                        "path": "fields.data.${app}.extra"
+                      },
+                      "view": {
+                        "path": "fields.data.${app}.view"
+                      }
+                    }
+                  },
+                  "connect": {
+                    "main_data": "${app}.data",
+                    "main_fields": "fields.data.${app}.fields"
+                  }
+                },
+                "type": "layout.table",
+                "w_type": "buznsi_admin_buttons",
+                "data": {
+                  "fun": "${fun}"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_fields_form",
+        "app": "buznsi_admin",
+        "s_class": "popup/${s_class|fields.module.less}",
+        "comp": "layout.style",
+        "wraps": {
+          "Form": {
+            "init": {
+              "key": "object/mapParams",
+              "params": {
+                "item": "${item}"
+              },
+              "fun": {
+                "key": "object/spread"
+              }
+            },
+            "onSubmit": "${onSubmit}"
+          },
+          "apply": {
+            "key": "common/resetData",
+            "reset": "${fields}"
+          }
+        },
+        "comps": {
+          "fields": {
+            "type": "common.normal_list",
+            "fun": {
+              "key": "list/ToArray",
+              "path": "props.item.fields"
+            },
+            "card": {
+              "wraps": {
+                "apply": {
+                  "key": "common/multiApply",
+                  "apps": {
+                    "extra": {
+                      "path": "props.item"
+                    },
+                    "data": {
+                      "path": "props.item"
+                    }
+                  }
+                }
+              },
+              "picks": [
+                "s_classes"
+              ],
+              "comp": "layout.widget",
+              "w_type": "buznsi_admin_field"
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_inner_form",
+        "app": "buznsi_admin",
+        "s_class": "form/${s_class}",
+        "comp": "layout.style",
+        "wraps": {
+          "apply": {
+            "key": "object/Pick",
+            "picks": [
+              "props.submitForm",
+              "props.validateForm"
+            ],
+            "then": {
+              "key": "store/Dispatching",
+              "fun": "set_path_form",
+              "params": {
+                "path": "inners.${model}"
+              }
+            }
+          },
+          "Form": {
+            "init": {
+              "key": "common/oringFunc",
+              "fun": {
+                "key": "object/StateSelector",
+                "path": "form.init_values.${model}"
+              },
+              "or": {
+                "key": "object/mapParams",
+                "params": "${init}",
+                "then": {
+                  "key": "strings/id",
+                  "then": {
+                    "key": "object/mapDotsToVal"
+                  }
+                }
+              }
+            },
+            "onSubmit": {
+              "key": "form/submitInner",
+              "app": "${model}"
+            }
+          },
+          "init": {
+            "type": "apply",
+            "key": "common/condition",
+            "path": "popup.popup.item.id",
+            "success": {
+              "key": "common/condition",
+              "path": "fields.data.${model}.edit",
+              "success": {
+                "key": "list/Find",
+                "path": "${model}",
+                "db_path": "popup.popup.item",
+                "params": "${edit}"
+              },
+              "fail": {
+                "path": "popup.popup.item"
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_path_form",
+                "params": {
+                  "path": "init_values.${model}"
+                }
+              }
+            }
+          },
+          "form_vals": {
+            "pick": [
+              "handleChange"
+            ]
+          }
+        },
+        "comps": {
+          "fields": {
+            "type": "common.normal_list",
+            "fun": {
+              "key": "list/ToArray",
+              "path": "props.item.fields"
+            },
+            "card": {
+              "wraps": {
+                "apply": {
+                  "key": "common/multiApply",
+                  "apps": {
+                    "extra": {
+                      "path": "props.item"
+                    },
+                    "data": {
+                      "path": "props.item"
+                    }
+                  }
+                }
+              },
+              "picks": [
+                "s_classes"
+              ],
+              "comp": "layout.widget",
+              "w_type": "buznsi_admin_field"
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_popup_create",
+        "app": "buznsi_admin",
+        "s_class": "admin/form.module.less",
+        "comps": {
+          "body": {
+            "wraps": {
+              "apply": {
+                "key": "store/Dispatching",
+                "fun": "reset_all_form",
+                "then": {
+                  "key": "object/Pick",
+                  "path": "props",
+                  "picks": [
+                    "submitForm",
+                    "validateForm"
+                  ],
+                  "then": {
+                    "key": "store/Dispatching",
+                    "fun": "set_path_form",
+                    "params": {
+                      "path": "main"
+                    }
+                  }
+                }
+              },
+              "Form": {
+                "onSubmit": {
+                  "key": "form/submitMultiForm",
+                  "then": {
+                    "key": "form/linked",
+                    "then": {
+                      "key": "request/updating",
+                      "then": {
+                        "key": "msg/alert",
+                        "msg": "Data Saved Successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "type": "layout.style",
+            "s_class": "${layout}",
+            "comps": {
+              "list": {
+                "wraps": {
+                  "apply": {
+                    "key": "common/multiApply",
+                    "apps": {
+                      "data": {
+                        "path": "props.item"
+                      }
+                    }
+                  },
+                  "BuildFields": {
+                    "models": "${models}"
+                  },
+                  "route": {}
+                },
+                "type": "common.collapse",
+                "headers": {
+                  "comp": "common.text",
+                  "fun": {
+                    "path": "props.item.title"
+                  },
+                  "_type": "h3"
+                },
+                "fun": {
+                  "key": "list/ToArray",
+                  "path": "props.models"
+                },
+                "card": {
+                  "wraps": {
+                    "apply": {
+                      "key": "common/multiApply",
+                      "apps": {
+                        "data": {
+                          "path": "props.item"
+                        }
+                      }
+                    }
+                  },
+                  "comp": "layout.widget",
+                  "w_type": "buznsi_admin_inner_form",
+                  "picks": [
+                    "data",
+                    "item",
+                    "gs"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_file_upload",
+        "app": "buznsi_admin",
+        "comps": {
+          "btn": {
+            "text": "Upload Excel File",
+            "type": "common.button",
+            "_type": "",
+            "action": {
+              "key": "request/upload_excel",
+              "accept": "${accept}",
+              "url": "${url}",
+              "multiple": "${multiple}",
+              "params": "${params}"
+            }
+          }
+        }
+      }
+    ],
+    "apps__module": [
+      {
+        "id": "buznsi_admin_account",
+        "name": "Account",
+        "_index": 1,
+        "action": {
+          "path": "/account-user",
+          "key": "route/navigate"
+        },
+        "app": "buznsi_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUsergroupAdd"
+        }
+      },
+      {
+        "id": "buznsi_admin_user",
+        "_index": 11,
+        "name": "Users",
+        "app": "buznsi_admin",
+        "url": "account-user",
+        "action": {
+          "path": "/account-user",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUserSwitch"
+        },
+        "parent": "buznsi_admin_account",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "fetch": [
+              "auth__user",
+              "swra__profile"
+            ],
+            "app": "auth__user",
+            "extra_actions": {
+              "comps": {
+                "edit_password": {
+                  "type": "common.button",
+                  "_type": "",
+                  "action": {
+                    "key": "object/mapParams",
+                    "params": {
+                      "id": "props.item.id"
+                    },
+                    "then": {
+                      "key": "object/addKeys",
+                      "keys": [
+                        "item"
+                      ],
+                      "then": {
+                        "key": "object/spread",
+                        "extra": {
+                          "popup": {
+                            "type": "popup",
+                            "picks": [
+                              "item"
+                            ],
+                            "title": "Set New Password",
+                            "comps": {
+                              "fields": {
+                                "type": "layout.widget",
+                                "w_type": "buznsi_admin_popup_fields",
+                                "data": {
+                                  "fields": {
+                                    "password": {
+                                      "comp": "common.input",
+                                      "props": {
+                                        "placeholder": "Input Password",
+                                        "label": "Password",
+                                        "_type": "password",
+                                        "name": "password"
+                                      },
+                                      "validates": {
+                                        "required": true
+                                      }
+                                    }
+                                  },
+                                  "init_value": {
+                                    "path": "popup.item"
+                                  },
+                                  "onSubmit": {
+                                    "key": "object/ToList",
+                                    "then": {
+                                      "key": "object/addKeys",
+                                      "keys": [
+                                        "auth__user"
+                                      ],
+                                      "then": {
+                                        "key": "request/updating",
+                                        "then": {
+                                          "key": "store/Dispatching",
+                                          "dis": [
+                                            {
+                                              "type": "reset_all_popup",
+                                              "data": {}
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "btns": {
+                              "comps": {
+                                "cancel": {
+                                  "type": "common.button",
+                                  "_type": "default",
+                                  "text": "Cancel",
+                                  "action": {
+                                    "key": "common/executeStateFun",
+                                    "fun": "props.cancel"
+                                  }
+                                },
+                                "ok": {
+                                  "type": "common.button",
+                                  "text": "Save",
+                                  "action": {
+                                    "key": "common/executeStateFun",
+                                    "fun": "popup.form.props.submitForm"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "then": {
+                          "key": "store/Dispatching",
+                          "fun": "set_main_popup"
+                        }
+                      }
+                    }
+                  },
+                  "comps": {
+                    "icon": {
+                      "type": "common.icon",
+                      "_type": "ai",
+                      "name": "AiFillLock"
+                    }
+                  }
+                }
+              }
+            },
+            "models": {
+              "auth__user": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_group",
+        "_index": 13,
+        "name": "Groups",
+        "app": "buznsi_admin",
+        "url": "account-group",
+        "action": {
+          "path": "/account-group",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineUsergroupAdd"
+        },
+        "parent": "buznsi_admin_account",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "fetch": [
+              "auth__group"
+            ],
+            "app": "auth__group",
+            "models": {
+              "auth__group": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings_settings",
+        "name": "Settings",
+        "_index": 2,
+        "action": {
+          "key": "route/navigate",
+          "path": "/settings-country"
+        },
+        "app": "buznsi_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillBuild"
+        }
+      },
+      {
+        "id": "buznsi_settings_country",
+        "name": "Country",
+        "app": "buznsi_admin",
+        "url": "settings-country",
+        "action": {
+          "path": "/settings-country",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__country",
+            "fetch": [
+              "settings__country"
+            ],
+            "models": {
+              "settings__country": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings_city",
+        "name": "City",
+        "app": "buznsi_admin",
+        "url": "settings-city",
+        "action": {
+          "path": "/settings-city",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__city",
+            "fetch": [
+              "settings__city"
+            ],
+            "models": {
+              "settings__city": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "settings__item_category",
+        "name": "Item Category",
+        "app": "buznsi_admin",
+        "url": "settings-item-category",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineCluster"
+        },
+        "action": {
+          "path": "/settings-item-category",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__item_category",
+            "fetch": [
+              "settings__item_category"
+            ],
+            "models": {
+              "settings__item_category": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings__items",
+        "name": "Items",
+        "app": "buznsi_admin",
+        "url": "settings-items",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillCheckSquare"
+        },
+        "action": {
+          "path": "/settings-items",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "extra_button": {
+              "type": "layout.widget",
+              "w_type": "buznsi_file_upload",
+              "data": {
+                "accept": ".xlsx,.xls",
+                "params": {
+                  "id": "buznsi_items"
+                }
+              }
+            },
+            "app": "settings__items",
+            "fetch": [
+              "settings__items"
+            ],
+            "models": {
+              "settings__items": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings__offer",
+        "name": "Offer",
+        "app": "buznsi_admin",
+        "url": "settings-offer",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "action": {
+          "path": "/settings-offer",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__offer",
+            "fetch": [
+              "settings__offer"
+            ],
+            "models": {
+              "settings__offer": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings__plan",
+        "name": "Plan",
+        "app": "buznsi_admin",
+        "url": "settings-plan",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "action": {
+          "path": "/settings-plan",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__plan",
+            "fetch": [
+              "settings__plan"
+            ],
+            "models": {
+              "settings__plan": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_settings__schedule",
+        "name": "Schedule",
+        "app": "buznsi_admin",
+        "url": "settings-schedule",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineDeploymentUnit"
+        },
+        "action": {
+          "path": "/settings-schedule",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_settings_settings",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "settings__schedule",
+            "fetch": [
+              "settings__schedule"
+            ],
+            "models": {
+              "settings__schedule": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_home",
+        "url": "home",
+        "name": "home",
+        "app": "buznsi_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillHome"
+        },
+        "widgets": {
+          "w_type": "buznsi_admin_home",
+          "data": {
+            "fun": {
+              "key": "strings/replaceTemplate",
+              "str": "apps__module.groups.parent."
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_admin_login",
+        "url": "login",
+        "props": {
+          "skip": true
+        },
+        "name": "login",
+        "app": "buznsi_admin",
+        "widgets": {
+          "w_type": "buznsi_admin_login",
+          "data": {
+            "logo": "logo.png"
+          }
+        },
+        "parent": "buznsi_admin_home"
+      },
+      {
+        "id": "buznsi_admin_init",
+        "init": true,
+        "app": "buznsi_admin",
+        "name": "init",
+        "body": {
+          "wraps": {
+            "apply": {
+              "key": "request/getCurrentUser",
+              "fail": {
+                "key": "store/inited",
+                "path": "props.match.params",
+                "then": {
+                  "key": "route/replace",
+                  "qs": true,
+                  "path": "/login"
+                }
+              },
+              "then": {
+                "key": "store/Dispatching",
+                "fun": "set_main_main",
+                "then": {
+                  "key": "store/inited",
+                  "then": {
+                    "key": "common/resetData",
+                    "then": {
+                      "key": "common/compare",
+                      "comp": "props.match.params.module",
+                      "then": {
+                        "key": "common/condition",
+                        "success": {
+                          "key": "route/replace",
+                          "path": "/home"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "route": {}
+          },
+          "comp": "common.fragment"
+        },
+        "parent": "buznsi_admin_home"
+      },
+      {
+        "id": "buznsi_organizations",
+        "name": "Organizations",
+        "_index": 2,
+        "action": {
+          "key": "route/navigate",
+          "path": "/product-company"
+        },
+        "app": "buznsi_admin",
+        "icon": {
+          "type": "ai",
+          "name": "AiFillBuild"
+        }
+      },
+      {
+        "id": "buznsi_product_company",
+        "name": "Company",
+        "app": "buznsi_admin",
+        "url": "product-company",
+        "action": {
+          "path": "/product-company",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        },
+        "parent": "buznsi_organizations",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "product__company",
+            "fetch": [
+              "product__company"
+            ],
+            "models": {
+              "product__company": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "buznsi_product_company_item",
+        "name": "Company Item",
+        "app": "buznsi_admin",
+        "url": "product-company-item",
+        "action": {
+          "path": "/product-company-item",
+          "key": "route/navigate"
+        },
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineProfile"
+        },
+        "parent": "buznsi_organizations",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "product__company_item",
+            "fetch": [
+              "product__company_item"
+            ],
+            "models": {
+              "product__company_item": {}
+            }
+          }
+        }
+      },
+      {
+        "id": "product__company_item_values",
+        "name": "Company Item Values",
+        "app": "buznsi_admin",
+        "url": "product-company_item_value",
+        "icon": {
+          "type": "ai",
+          "name": "AiOutlineCluster"
+        },
+        "action": {
+          "path": "/product-company_item_value",
+          "key": "route/navigate"
+        },
+        "parent": "buznsi_organizations",
+        "widgets": {
+          "w_type": "buznsi_admin_manage",
+          "data": {
+            "app": "company_item_values",
+            "fetch": [
+              "company_item_values"
+            ],
+            "models": {
+              "company_item_values": {}
+            }
+          }
+        }
+      }
+    ],
+    "apps__model": [
+      {
+        "id": "buznsi__buznsi__auth__user",
+        "path": "auth__user",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "email",
+            "created_at",
+            "group",
+            "actions"
+          ],
+          "hide": [
+            "apps",
+            "social",
+            "country",
+            "cover",
+            "settings",
+            "perms",
+            "info",
+            "last_login",
+            "profile",
+            "status",
+            "groups",
+            "r_code"
+          ],
+          "models": [
+            "auth__user",
+            "swra__profile"
+          ]
+        },
+        "fields": {
+          "name": {
+            "show": {
+              "key": "list/joining",
+              "path": "props.item",
+              "separate": " ",
+              "funs": {
+                "first": {
+                  "key": "object/GetDataSelector",
+                  "show": "name.first_name"
+                },
+                "last": {
+                  "key": "object/GetDataSelector",
+                  "show": "name.last_name"
+                }
+              }
+            }
+          },
+          "groups": {
+            "show": {
+              "key": "object/GetDataSelector",
+              "show": "groups.swra"
+            }
+          },
+          "password": {
+            "type": "password",
+            "per": {
+              "no_edit": {
+                "key": "condition/not",
+                "path": "popup.popup.item.id"
+              }
+            }
+          },
+          "is_admin": {
+            "per": {
+              "admin": {
+                "key": "condition/bool",
+                "path": "main.user.is_admin"
+              }
+            }
+          },
+          "group": {
+            "fieldName": "apps.swra.group",
+            "label": "Group",
+            "type": "select",
+            "targetDocument": "swra__group"
+          },
+          "gender": {
+            "label": "Male"
+          },
+          "org": {
+            "per": {
+              "admin": {
+                "key": "condition/bool",
+                "path": "main.user.is_admin"
+              }
+            },
+            "fieldName": "apps.swra.org",
+            "label": "Organization",
+            "type": "select",
+            "targetDocument": "swra__org"
+          },
+          "active": {
+            "fieldName": "apps.swra.active",
+            "label": "Active",
+            "type": "bool"
+          }
+        }
+      },
+      {
+        "id": "buznsi__product__company",
+        "path": "product__company",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "product__company"
+          ],
+          "hide": [
+            "settings"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__product__company_item",
+        "path": "product__company_item",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "subscription",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "product__company_item"
+          ],
+          "hide": [
+            "settings"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__product__company_item_values",
+        "path": "product__company_item_values",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "desc",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "main__category"
+          ],
+          "hide": [
+            "settings"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__city",
+        "path": "settings__city",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__city"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__country",
+        "path": "settings__country",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__city"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__item_category",
+        "path": "settings__item_category",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__item_category"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__items",
+        "path": "settings__items",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "order",
+            "exp",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__items"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__offer",
+        "path": "settings__offer",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__offer"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__schedule",
+        "path": "settings__schedule",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "value",
+            "parent",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__schedule"
+          ]
+        }
+      },
+      {
+        "id": "buznsi__settings__plan",
+        "path": "settings__plan",
+        "app": "buznsi_admin",
+        "props": {
+          "view": [
+            "name",
+            "created_at",
+            "actions"
+          ],
+          "models": [
+            "settings__plan"
+          ]
+        }
+      }
+    ],
+    "apps__files": [
+      {
+        "id": "buznsi_items",
+        "type": "excel",
+        "app": "buznsi_admin"
+      }
+    ],
+    "apps__sheets": [
+      {
+        "id": "buznsi__settings_items",
+        "name": "items",
+        "ident": "order",
+        "model": "settings__items",
+        "links": {
+          "category": {
+            "model": "settings__item_category",
+            "query": {
+              "name": "category"
+            }
+          }
+        },
+        "app": "buznsi_admin",
+        "file": "buznsi_items"
+      }
+    ]
+  },
+  "reset": true
+}

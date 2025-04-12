@@ -1,0 +1,73 @@
+.tagsSt {
+  color: #0a82e0;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 11px;
+  background-color: #e7f3fe;
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+.mainTxt {
+  font-family: "IBM Plex Sans" !important;
+  color: #2e3337;
+}
+.spanTxt {
+  font-family: "IBM Plex Sans" !important;
+  color: #6d6d6d;
+  font-size: 14px;
+}
+.colStyle {
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  text-align: center;
+  padding: 50px 20px;
+}
+.colStyle1 {
+  background-color: #0a82e0;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  text-align: center;
+  padding: 50px 20px;
+  margin-top: 50px;
+}
+.iconSt {
+  cursor: pointer;
+  align-items: center;
+  padding: 5px 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #e7f3fe;
+  color: #3cbdfe;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+}
+.iconSt svg {
+  width: 40px;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  line-height: 60px;
+}
+.headTxt {
+  font-family: "NeusaNextPro" !important;
+  font-size: 20px;
+  color: #636363;
+  margin: 15px 0;
+}
+.smTxt {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  color: #6d6d6d;
+}
+.headTxt1 {
+  font-family: "NeusaNextPro" !important;
+  font-size: 20px;
+  color: #fff;
+  margin: 15px 0;
+}
+.smTxt1 {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  color: #fff;
+}

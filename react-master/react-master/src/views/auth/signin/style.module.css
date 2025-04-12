@@ -1,0 +1,103 @@
+.secBackG {
+  background: url("../../../images/new/log.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+.logInBg {
+  backdrop-filter: blur(14px);
+  height: 80vh;
+  width: 100%;
+  margin: auto;
+  border-radius: 20px !important;
+}
+.secCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.logoSt {
+  width: 101px;
+  height: 111px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.headTxt {
+  font-family: "NeusaNextPro" !important;
+  font-size: 50px;
+  color: #012547;
+}
+.secTxt span {
+  font-family: "IBM Plex Sans";
+  font-size: 18px;
+  color: #fff;
+}
+.secTxt a {
+  font-family: "IBM Plex Sans";
+  font-size: 18px;
+  text-decoration: underline;
+  color: #c9c9c9;
+}
+.labelSt {
+  font-family: "IBM Plex Sans";
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+.inputSt {
+  display: block;
+  width: 100%;
+  height: 45px;
+  border: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  font-family: "IBM Plex Sans";
+  padding-left: 10px;
+}
+.inputSt:focus {
+  outline: none;
+}
+.btnSt {
+  background-color: #012547;
+  color: #fff;
+  font-family: "IBM Plex Sans";
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+}
+.btnSt:hover {
+  background-color: #012547;
+  color: #fff;
+}
+.termsPolicy {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+  font-family: "IBM Plex Sans";
+  font-size: 10px;
+}
+.underLine {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .logInBg {
+    width: 591px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .termsPolicy {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .logInBg {
+    height: 80vh;
+  }
+}

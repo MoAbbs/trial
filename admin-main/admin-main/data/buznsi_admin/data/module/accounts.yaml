@@ -1,0 +1,123 @@
+buznsi_admin_account:
+  id: buznsi_admin_account
+  name: Account
+  _index: 1
+  action:
+    path: /account-user
+    key: route/navigate
+  app: buznsi_admin
+  icon:
+    type: ai
+    name: AiOutlineUsergroupAdd
+
+buznsi_admin_user:
+  id: buznsi_admin_user
+  _index: 11
+  name: Users
+  app: buznsi_admin
+  url: account-user
+  action:
+    path: /account-user
+    key: route/navigate
+  icon:
+    type: ai
+    name: AiOutlineUserSwitch
+  parent: buznsi_admin_account
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      fetch: [auth__user, swra__profile]
+      app: auth__user
+      extra_actions:
+        comps:
+          edit_password:
+            type: common.button
+            _type: ''
+            action:
+              key: object/mapParams
+              params:
+                id: props.item.id
+              then:
+                key: object/addKeys
+                keys: [item]
+                then:
+                  key: object/spread
+                  extra:
+                    popup:
+                      type: popup
+                      picks: ['item']
+                      title: Set New Password
+                      comps:
+                        fields:
+                          type: layout.widget
+                          w_type: buznsi_admin_popup_fields
+                          data:
+                            fields:
+                              password:
+                                comp: common.input
+                                props:
+                                  placeholder: Input Password
+                                  label: Password
+                                  _type: password
+                                  name: password
+                                validates:
+                                    required: true
+                            init_value:
+                              path: popup.item
+                            onSubmit:
+                              key: object/ToList
+                              then:
+                                key: object/addKeys
+                                keys: ['auth__user']
+                                then:
+                                  key: request/updating
+                                  then:
+                                    key: store/Dispatching
+                                    dis: [{type: 'reset_all_popup', data: {}}]
+                      btns:
+                        comps:
+                          cancel:
+                            type: common.button
+                            _type: default
+                            text: Cancel
+                            action:
+                              key: common/executeStateFun
+                              fun: props.cancel
+                          ok:
+                            type: common.button
+                            text: 'Save'
+                            action:
+                              key: common/executeStateFun
+                              fun: popup.form.props.submitForm
+                  then:
+                    key: store/Dispatching 
+                    fun: set_main_popup
+            comps:
+              icon:
+                type: common.icon
+                _type: ai
+                name: AiFillLock
+      models: 
+        auth__user: {}
+
+buznsi_admin_group:
+  id: buznsi_admin_group
+  _index: 13
+  name: Groups
+  app: buznsi_admin
+  url: account-group
+  action:
+    path: /account-group
+    key: route/navigate
+  icon:
+    type: ai
+    name: AiOutlineUsergroupAdd
+  parent: buznsi_admin_account
+  widgets:
+    w_type: buznsi_admin_manage
+    data:
+      fetch: [auth__group]
+      app: auth__group
+      models: 
+        auth__group: {}
+          

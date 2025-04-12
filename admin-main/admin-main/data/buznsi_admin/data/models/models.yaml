@@ -1,0 +1,160 @@
+auth__user:
+  id: buznsi__buznsi__auth__user
+  path: auth__user
+  app: buznsi_admin
+  props:
+    view: [name, email, created_at, group, actions]
+    hide: [apps, social, country, cover, settings, perms, info, last_login, profile, status, groups, r_code]
+    models: [auth__user, swra__profile]
+  fields:
+    name:
+      show:
+        key: list/joining
+        path: props.item
+        separate: ' '
+        funs:
+          first:
+            key: object/GetDataSelector
+            show: name.first_name
+          last:
+            key: object/GetDataSelector
+            show: name.last_name
+    groups:
+      show:
+        key: object/GetDataSelector
+        show: groups.swra
+    password:
+      type: password
+      per:
+        no_edit:
+          key: condition/not
+          path: popup.popup.item.id
+    is_admin:
+      per:
+        admin:
+          key: condition/bool
+          path: main.user.is_admin
+    group:
+      fieldName: apps.swra.group
+      label: Group
+      type: select
+      targetDocument: swra__group
+    gender:
+      label: Male
+    org:
+      per:
+        admin:
+          key: condition/bool
+          path: main.user.is_admin
+      fieldName: apps.swra.org
+      label: Organization
+      type: select
+      targetDocument: swra__org
+    active:
+      fieldName: apps.swra.active
+      label: Active
+      type: bool
+
+
+product__company:
+  id: buznsi__product__company
+  path: product__company
+  app: buznsi_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [product__company]
+    hide: [settings]
+
+
+product__company_item:
+  id: buznsi__product__company_item
+  path: product__company_item
+  app: buznsi_admin
+  props: 
+    view: [name, subscription, created_at, actions]
+    models: [product__company_item]
+    hide: [settings]
+
+
+product__company_item_values:
+  id: buznsi__product__company_item_values
+  path: product__company_item_values
+  app: buznsi_admin
+  props: 
+    view: [name, desc, created_at, actions]
+    models: [product__company_item_values]
+    hide: [settings]
+
+
+settings__city:
+  id: buznsi__settings__city
+  path: settings__city
+  app: buznsi_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [settings__city]
+
+
+settings__country:
+  id: buznsi__settings__country
+  path: settings__country
+  app: buznsi_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [settings__city]
+
+
+settings__item_category:
+  id: buznsi__settings__item_category
+  path: settings__item_category
+  app: buznsi_admin
+  fields:
+    _index:
+      per:
+        admin:
+          key: condition/bool
+          path: main.user.is_admin
+    type:
+      per:
+        admin:
+          key: condition/bool
+          path: main.user.is_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [settings__item_category]
+
+
+settings__items:
+  id: buznsi__settings__items
+  path: settings__items
+  app: buznsi_admin
+  props: 
+    view: [name,order, exp, created_at, actions]
+    models: [settings__items]
+
+
+settings__offer:
+  id: buznsi__settings__offer
+  path: settings__offer
+  app: buznsi_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [settings__offer]
+
+
+settings__schedule:
+  id: buznsi__settings__schedule
+  path: settings__schedule
+  app: buznsi_admin
+  props: 
+    view: [value,parent, created_at, actions]
+    models: [settings__schedule]
+
+
+settings__plan:
+  id: buznsi__settings__plan
+  path: settings__plan
+  app: buznsi_admin
+  props: 
+    view: [name, created_at, actions]
+    models: [settings__plan]

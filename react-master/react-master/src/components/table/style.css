@@ -1,0 +1,58 @@
+.editable-cell {
+  position: relative;
+}
+
+.editable-cell-value-wrap {
+  padding: 5px 12px;
+  cursor: pointer;
+  height: 45px;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.category{
+  font-size: large;
+}
+.category .category{
+  padding: 22px;
+  background-color: #455054;
+  color: white;
+  text-align: center;
+}
+.category .category:hover{
+  padding: 22px;
+  background-color: #455054;
+  color: white;
+  text-align: center;
+}
+.category td{
+  border: none !important;
+}
+.category .editable-cell-value-wrap{
+  padding: 0px;
+  box-shadow: none;
+  border: none;
+}
+
+/* .editable-row:hover .editable-cell-value-wrap {
+  padding: 5px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .editable-row:hover .editable-cell-value-wrap {
+  border: 1px solid #434343;
+} */
+.editCellSt {
+  padding: 5px 12px;
+  cursor: pointer;
+  height: 35px;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+}
+.editCellSt:focus {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
+}

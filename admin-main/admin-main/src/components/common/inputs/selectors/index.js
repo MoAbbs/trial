@@ -1,0 +1,12 @@
+import {lazy} from 'react';
+export const select = lazy(()=>import('./select/index.jsx'))
+// export const slider = lazy(()=>import('./range/index.jsx'))
+// export const rate = lazy(()=>import('./slider/index.jsx'))
+// export const buttons = lazy(()=>import('./buttons/index.jsx'))
+// export const list = lazy(()=>import('./list/index.jsx'))
+// export const image = lazy(()=>import('./image-picker/index.jsx'))
+export const date = lazy(()=>import('./date/index.jsx'))
+export const datetime = lazy(()=>import('./date/index.jsx'))
+export const tree_select = lazy(()=>import('./tree_select/index.jsx'))
+// export const rangeSlider = lazy(()=>import('./slider/index.jsx'))
+// export const radio = lazy(()=>import('./radio/index.jsx'))

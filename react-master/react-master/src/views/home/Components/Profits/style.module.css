@@ -1,0 +1,78 @@
+.secWidth {
+  width: 65%;
+  margin: auto;
+}
+.iconSt {
+  cursor: pointer;
+  align-items: center;
+  padding: 20px 10px;
+  margin-right: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  color: #3cbdfe;
+  border-radius: 50%;
+}
+.iconSt svg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.iconSt2 {
+  cursor: pointer;
+  align-items: center;
+  padding: 17px 10px;
+  margin-right: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  color: #3cbdfe;
+  border-radius: 50%;
+}
+.iconSt2 svg {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mainTxt {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 20px;
+  color: #484848;
+}
+.secTxt {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  color: #6d6d6d;
+}
+.readTxt {
+  cursor: pointer;
+}
+.readTxt span {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  color: #0a84e3;
+}
+.readTxt i {
+  font-size: 12px;
+  color: #4eadfe;
+  margin-left: 10px;
+}
+@media only screen and (min-width: 1200px) {
+  .mainTxt {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .secTxt {
+    font-size: 10px;
+  }
+}
+@media only screen and (min-width: 1350px) {
+  .mainTxt {
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .secTxt {
+    font-size: 12px;
+  }
+}

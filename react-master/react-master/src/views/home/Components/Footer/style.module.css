@@ -1,0 +1,62 @@
+.footerSt {
+  background-color: #e7f3fe;
+  padding: 50px 0;
+}
+.lineTxt {
+  color: #707070;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  margin: 10px 0;
+}
+.iconsSt i {
+  color: #0a82e0;
+  font-size: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.headTxt {
+  margin-bottom: 30px;
+  color: #707070;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 20px;
+}
+.blueTxt {
+  color: #0f3ad7;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 14px;
+}
+.secTxt {
+  color: #707070;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 14px;
+}
+.getStart {
+  color: #000000;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 25px;
+  text-align: center;
+}
+.inputSt {
+  display: block;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  height: 50px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  font-family: "Helvetica" !important;
+  margin-bottom: 10px;
+}
+.inputSt:focus {
+  outline: none;
+}
+.inputSt::placeholder {
+  font-size: 13px;
+  color: #707070;
+}
+.btnSt {
+  background-color: #0a82e0;
+  border-radius: 30px;
+  font-family: "Helvetica" !important;
+  color: #fff !important;
+  padding: 10px 0;
+  font-size: 14px;
+}

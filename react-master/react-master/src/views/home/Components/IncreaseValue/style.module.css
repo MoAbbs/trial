@@ -1,0 +1,75 @@
+.headTxt {
+  margin: 0 22px 13px 1px;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 99%;
+  color: #2e3337;
+  margin-top: 20px;
+}
+.tagsSt {
+  color: #0a82e0;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 14px;
+  background-color: #e7f3fe;
+  padding: 10px;
+  border-radius: 10px;
+}
+.TxtSt {
+  margin: 28px 0 30.3px 0px;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 16px;
+
+  letter-spacing: -0.13px;
+  color: #969696;
+}
+.iconSt {
+  cursor: pointer;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 0 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  color: #3cbdfe;
+  border-radius: 50%;
+}
+.iconSt svg {
+  width: 20px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.trendTxtSt {
+  color: #484848;
+}
+.firstBtn {
+  margin: 10px 25px 0 0;
+  padding: 10px 20px;
+  border-radius: 34px;
+  background-color: #0a84e3;
+  color: white;
+  font-family: "Helvetica";
+  font-size: 14px;
+}
+.imgSt {
+  width: 100%;
+  border-radius: 10px;
+}
+@media only screen and (min-width: 768px) {
+  .headTxt {
+    font-size: 20px;
+  }
+  .TxtSt {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .headTxt {
+    font-size: 38px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .TxtSt {
+    font-size: 16px;
+  }
+}

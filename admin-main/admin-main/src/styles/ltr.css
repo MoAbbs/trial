@@ -1,0 +1,10 @@
+body{
+  direction: ltr;
+}
+.ant-modal-close{
+  right: 0;
+  left: auto!important;
+}
+.open {
+  transform: rotate(90deg);
+}

@@ -1,0 +1,13 @@
+id: buznsi_file_upload
+app: buznsi_admin
+comps:
+  btn:
+    text: Upload Excel File
+    type: common.button
+    _type: ''
+    action:
+      key: request/upload_excel
+      accept: ${accept}
+      url: ${url}
+      multiple: ${multiple}
+      params: ${params}

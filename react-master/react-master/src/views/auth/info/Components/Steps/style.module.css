@@ -1,0 +1,12 @@
+.unActiveStep {
+  width: 100%;
+  height: 5px;
+  background-color: #dedede;
+  border-radius: 12px;
+}
+.activeStep {
+  width: 100%;
+  height: 5px;
+  background-image: linear-gradient(to right, #032a4e, #2b80d1);
+  border-radius: 12px;
+}

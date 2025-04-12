@@ -1,0 +1,12 @@
+settings_items:
+  id: buznsi__settings_items
+  name: items
+  ident: order
+  model: settings__items
+  links:
+    category:
+      model: settings__item_category
+      query:
+        name: category
+  app: buznsi_admin
+  file: buznsi_items

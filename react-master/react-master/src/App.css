@@ -1,0 +1,7 @@
+
+table,table tr,table td{
+    z-index: 20;
+}
+.text-primary{
+    color: #012547 !important;
+}

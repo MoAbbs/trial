@@ -1,0 +1,136 @@
+.navMar {
+  margin-bottom: 20px;
+}
+
+.logoSt {
+  width: 90px;
+  height: 90px;
+  margin-right: 100px !important;
+}
+.iconSt svg g [fill] {
+  fill: #a8a8a8 !important;
+}
+.iconSt {
+  position: relative;
+  cursor: pointer;
+}
+.greenDot1 {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  color: #2ef62a;
+  font-size: 10px;
+}
+.profImg {
+  position: relative;
+}
+.profImg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.greenDot2 {
+  position: absolute;
+  bottom: 2px;
+  right: 1px;
+  color: #2ef62a;
+  font-size: 10px;
+}
+
+.searchSt {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: rgba(242, 234, 229, 0.5);
+  transition: transform 250ms ease-in-out;
+  line-height: 18px;
+  color: #012547;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 95% center;
+  border-radius: 5px;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  border: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.searchSt::placeholder {
+  color: #012547;
+  letter-spacing: 1.5px;
+  font-family: "NeusaNextPro" !important;
+  font-size: 12px;
+}
+
+.searchSt:hover,
+.searchSt:focus {
+  padding: 12px 0;
+  outline: 0;
+  border: unset;
+  background-color: transparent !important;
+  border-bottom: 1px solid #012547;
+  border-radius: 0;
+  background-position: 100% center;
+  box-shadow: none;
+}
+
+.dropdownSt {
+  position: relative;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: -5px;
+  background-color: #f2f5f7;
+  min-width: 175px;
+  z-index: 99;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.dropdownContent:after {
+  content: " ";
+  position: absolute;
+  right: 10px;
+  top: -12px;
+  border-top: none;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid #f2f5f7;
+}
+
+.dropdownContent a {
+  color: black;
+  margin-bottom: 5px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownSt:hover .dropdownContent {
+  display: block;
+}
+.divSty {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  text-align: center;
+  cursor: pointer;
+}
+.divSty img {
+  width: 40px;
+  height: 20px;
+}
+.divSty i {
+  color: rgba(33, 150, 243, 0.5);
+  font-size: 20px;
+}
+.divSty span {
+  font-family: "NeusaNextPro";
+  color: #455054;
+  font-size: 12px;
+  display: block;
+}

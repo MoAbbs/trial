@@ -1,0 +1,68 @@
+id: buznsi_admin_inner_form
+app: buznsi_admin
+s_class: form/${s_class}
+comp: layout.style
+wraps:
+  apply:
+    key: object/Pick
+    picks: [props.submitForm, props.validateForm]
+    then:
+      key: store/Dispatching
+      fun: set_path_form
+      params:
+        path: inners.${model}
+  Form:
+    init:
+      key: common/oringFunc
+      fun:
+        key: object/StateSelector
+        path: form.init_values.${model}
+      or:
+        key: object/mapParams
+        params: ${init}
+        then:
+          key: strings/id
+          then: 
+            key: object/mapDotsToVal
+    onSubmit:
+      key: form/submitInner
+      app: ${model}
+  init:
+    type: apply
+    key: common/condition
+    path: popup.popup.item.id
+    success:
+      key: common/condition
+      path: fields.data.${model}.edit
+      success:
+        key: list/Find
+        path: ${model}
+        db_path: popup.popup.item
+        params: ${edit}
+      fail:
+        path: popup.popup.item
+      then:
+        key: store/Dispatching
+        fun: set_path_form
+        params:
+          path: init_values.${model}
+  form_vals: 
+    pick: [handleChange]
+comps:
+  fields:
+    type: common.normal_list
+    fun:
+      key: list/ToArray
+      path: props.item.fields
+    card:
+      wraps:
+        apply:
+          key: common/multiApply
+          apps:
+            extra: 
+              path: props.item
+            data:
+              path: props.item
+      picks: [s_classes]
+      comp: layout.widget
+      w_type: buznsi_admin_field

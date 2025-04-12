@@ -1,0 +1,35 @@
+.secWidth {
+  background-color: rgba(128, 128, 128, 0.4);
+  padding: 20px 0;
+}
+.mainBtn {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #012547;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  font-family: "NeusaNextPro";
+}
+.mainBtn:hover {
+  color: #fff;
+}
+.totalBtn {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #012547;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  font-family: "NeusaNextPro";
+  padding: 20px 20px;
+}
+.totalBtn:hover {
+  color: #fff;
+}
+.supSt {
+  font-size: 14px !important;
+  margin-bottom: -50px !important;
+  font-family: "IBM Plex Sans" !important;
+  color: rgba(255, 255, 255, 0.5);
+}

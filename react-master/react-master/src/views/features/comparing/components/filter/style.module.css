@@ -1,0 +1,51 @@
+.tab {
+  padding: 5px 15px;
+  margin: 20px 10px;
+  border: 1px solid #333;
+  background-color: #eee;
+  border-radius: 10px;
+  color: #333;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.tab:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+.active {
+  background-color: #6c757d;
+  color: #fff;
+}
+.parent {
+  background-color: #6c757d;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+.parentSub {
+  background-color: #eee;
+  border: 1px solid #333;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 3px;
+}
+.mainBtn {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #012547;
+  color: #fff;
+}
+.mainBtn:hover {
+  color: #fff;
+}
+.selectSt {
+  background-color: #eee;
+  cursor: pointer;
+  padding: 9px 7px;
+  border: none;
+  font-family: "NeusaNextPro";
+}

@@ -1,0 +1,259 @@
+.backBgSt {
+  background: linear-gradient(
+      to right,
+      rgba(240, 249, 255, 0.5),
+      rgba(240, 249, 255, 0.4)
+    ),
+    url(../../../../images/home/Mask.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
+  padding: 20px 0 0;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.secWid {
+  width: 80%;
+  margin: 30px auto;
+}
+.SponBy {
+  width: 160px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px auto;
+  font-family: "NeusaNextPro" !important;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #0a82e0;
+  margin: 20px auto;
+}
+.secHeadTxt {
+  font-family: "IBM Plex Sans" !important;
+  margin: 20px auto;
+  font-size: 35px;
+  font-weight: 500;
+  text-align: center;
+  color: #484848;
+}
+.secTxt {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 12px;
+  text-align: center;
+  color: #484848;
+  font-weight: bold;
+  width: 60%;
+  margin: auto;
+}
+
+.switchTxt {
+  font-family: "IBM Plex Sans" !important;
+  font-size: 14px;
+  color: #6c6c6c;
+  margin: 0 10px;
+}
+.priceSt {
+  background-color: #e7f3fe;
+  border-radius: 15px;
+  box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.16);
+  padding: 40px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+/* .priceSt:hover {
+  background-color: #0a82e0;
+  transform: scale(1.05);
+  cursor: pointer;
+  color: #fff !important;
+} */
+.requestBtn {
+  background-color: #fff;
+  color: #0a82e0;
+  font-family: "NeusaNextPro" !important;
+  font-size: 16px;
+  border-radius: 30px;
+  padding: 10px 40px;
+}
+.requestBtn:hover {
+  background-color: #fff;
+  color: #0a82e0;
+}
+.priceHead {
+  border-bottom: 2px solid rgba(112, 112, 112, 0.5);
+}
+.typeSt {
+  color: #484848;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 20px;
+}
+.priceNum {
+  color: #484848;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 55px !important;
+  font-weight: bolder;
+}
+.perMonth {
+  position: absolute;
+  bottom: 25px;
+  right: -17px;
+  font-size: 16px;
+  font-family: "IBM Plex Sans" !important;
+}
+.dollar {
+  position: absolute;
+  top: 25px;
+  left: -10px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "NeusaNextPro" !important;
+}
+.requestBtn:hover .priceNum {
+  color: #fff !important;
+}
+.checkSty span {
+  font-size: 16px;
+  font-family: "NeusaNextPro" !important;
+}
+.checkSty1 span {
+  font-size: 16px;
+  font-family: "NeusaNextPro" !important;
+  color: rgba(72, 72, 72, 0.5);
+}
+.checkSty1 i {
+  color: rgba(72, 72, 72, 0.5);
+}
+/* ------------------center div------------------ */
+.priceSt1 {
+  background-color: #0a82e0;
+  transform: scale(1.05);
+  cursor: pointer;
+  color: #fff !important;
+  border-radius: 15px;
+  box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.16);
+  padding: 50px 40px;
+  transition: all 0.5s;
+}
+.checkSty2 span {
+  font-size: 16px;
+  font-family: "NeusaNextPro" !important;
+  color: rgba(255, 255, 255, 0.6);
+}
+.checkSty2 i {
+  color: rgba(255, 255, 255, 0.6);
+}
+.typeSt1 {
+  color: #fff;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 20px;
+}
+.priceNum1 {
+  color: #fff;
+  font-family: "IBM Plex Sans" !important;
+  font-size: 55px !important;
+  font-weight: bolder;
+}
+.recommend {
+  background-color: #fff;
+  color: #0a82e0;
+  font-family: "NeusaNextPro" !important;
+  font-size: 12px;
+  border-radius: 30px;
+  padding: 7px 15px;
+}
+.priceHead1 {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+}
+/* ------------------center div------------------ */
+@media only screen and (min-width: 992px) {
+  .typeSt {
+    font-size: 15px;
+  }
+  .typeSt1 {
+    font-size: 15px;
+  }
+  .priceNum {
+    font-size: 45px !important;
+  }
+  .priceNum1 {
+    color: #fff;
+    font-family: "IBM Plex Sans" !important;
+    font-size: 45px !important;
+  }
+  .secTxt {
+    font-size: 16px;
+  }
+  .checkSty span {
+    font-size: 12px;
+  }
+  .checkSty1 span {
+    font-size: 12px;
+  }
+  .checkSty2 span {
+    font-size: 12px;
+  }
+  .perMonth {
+    right: -22px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .typeSt {
+    font-size: 25px;
+  }
+  .typeSt1 {
+    font-size: 25px;
+  }
+  .priceNum {
+    font-size: 45px !important;
+  }
+  .priceNum1 {
+    color: #fff;
+    font-family: "IBM Plex Sans" !important;
+    font-size: 45px !important;
+  }
+  .secTxt {
+    font-size: 16px;
+  }
+  .checkSty span {
+    font-size: 16px;
+  }
+  .checkSty1 span {
+    font-size: 16px;
+  }
+  .checkSty2 span {
+    font-size: 16px;
+  }
+  .perMonth {
+    right: -22px;
+  }
+}
+@media only screen and (min-width: 1350px) {
+  .typeSt {
+    font-size: 35px;
+  }
+  .typeSt1 {
+    font-size: 35px;
+  }
+  .priceNum {
+    font-size: 55px !important;
+  }
+  .priceNum1 {
+    font-size: 55px !important;
+  }
+  .secTxt {
+    font-size: 16px;
+  }
+  .checkSty span {
+    font-size: 16px;
+  }
+  .checkSty1 span {
+    font-size: 16px;
+  }
+  .checkSty2 span {
+    font-size: 16px;
+  }
+  .perMonth {
+    right: -22px;
+  }
+}

@@ -1,0 +1,15 @@
+.modal-footer .btn-light-primary {
+  background-color: #fff;
+  color: #012547;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  padding: 7px 20px;
+  border: none;
+  font-family: "NeusaNextPro";
+}
+.modal-footer .btn-primary {
+  background-color: #012547 !important;
+  color: #fff;
+  padding: 7px 20px;
+  border: none;
+  font-family: "NeusaNextPro";
+}

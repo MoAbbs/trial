@@ -1,0 +1,94 @@
+.secWidth {
+  width: 90%;
+  margin: 30px auto;
+}
+.studSt {
+  font-family: "NeusaNextPro" !important;
+  font-size: 14px;
+  color: #8b8b8b;
+  cursor: pointer;
+}
+.headTxt {
+  font-family: "NeusaNextPro" !important;
+  font-size: 20px;
+  color: #1b76bf;
+}
+.lineAfter {
+  background-color: #1b76bf;
+  height: 5px;
+  width: 20%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.checkSec i {
+  color: #1b76bf;
+  margin-right: 10px;
+}
+.checkSec span {
+  font-family: "NeusaNextPro" !important;
+  color: #484848;
+  font-size: 16px;
+}
+.rightDiv {
+  background-color: #fff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  padding: 40px;
+}
+.inputSt {
+  background-color: #f3f3f3;
+  border: none;
+  margin-bottom: 10px;
+  height: 44px;
+  border-radius: 10px;
+  font-family: "NeusaNextPro" !important;
+  color: #aaaaaa;
+}
+.inputSt::placeholder {
+  color: #aaaaaa;
+}
+.inputSt:focus {
+  background-color: #f3f3f3;
+  color: #aaaaaa;
+}
+.textareaSt {
+  background-color: #f3f3f3;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-family: "NeusaNextPro" !important;
+  color: #aaaaaa;
+}
+.textareaSt:focus {
+  background-color: #f3f3f3;
+  color: #aaaaaa;
+}
+.btnSt {
+  background-color: #0a82e0;
+  border-radius: 30px;
+  font-family: "Helvetica" !important;
+  color: #fff !important;
+  padding: 10px 30px;
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .checkSec span {
+    font-size: 11px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .rightDiv {
+    margin-top: -110px;
+  }
+  .secWidth {
+    width: 65%;
+    margin: auto;
+  }
+  .headTxt {
+    font-size: 30px;
+  }
+  .checkSec span {
+    font-size: 13px;
+  }
+}

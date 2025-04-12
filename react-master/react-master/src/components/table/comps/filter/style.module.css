@@ -1,0 +1,84 @@
+.tab {
+  padding: 5px 15px;
+  margin: 20px 10px;
+  border: 1px solid #333;
+  background-color: #eee;
+  border-radius: 10px;
+  color: #333;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.tab:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+.active {
+  background-color: #6c757d;
+  color: #fff;
+}
+.check {
+  background-color: #ffff0052 !important;
+}
+.parent {
+  color: #095195;
+  margin: 5px 0px;
+  text-transform: uppercase;
+  font-family: "NeusaNextPro";
+  font-size: 16px;
+  font-weight: bold;
+}
+.parentSub {
+  background-color: #f6f6f6;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "NeusaNextPro";
+  font-size: 11px;
+  margin: 5px;
+  min-width: 100px;
+}
+
+.mainBtn {
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #012547;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  font-family: "NeusaNextPro";
+}
+.mainBtn:hover {
+  color: #fff;
+}
+.typeTxt {
+  background-color: #012547 !important;
+  color: #fff;
+  padding: 7px 20px;
+  border: none;
+  font-family: "NeusaNextPro";
+  font-size: 16px;
+}
+.selectInput {
+  padding: 10px 20px;
+  background-color: #f6f6f6;
+  color: #012547;
+  border: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "NeusaNextPro";
+}
+.selectInput:focus {
+  outline: none;
+}
+.yearSt {
+  margin: 3px 0px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.yearSt:last-child {
+  border-bottom: none;
+}
